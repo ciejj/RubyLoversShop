@@ -12,6 +12,10 @@ gem 'sass-rails', '5.1.0'
 gem 'webpacker', '~> 4.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 
+group :test do
+  gem 'capybara'
+end
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 4.0.0'
