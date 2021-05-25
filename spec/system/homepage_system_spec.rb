@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Home Page', type: :system do
   before(:each) do
-    create(:product, name: 'product_1')
-    create(:product, name: 'product_2')
+    category = create(:category)
+    create(:product, name: 'product_1', category: category)
+    create(:product, name: 'product_2', category: category)
   end
 
   it 'displays all available Products' do
