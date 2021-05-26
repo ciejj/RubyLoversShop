@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Home Page', type: :system do
-  before(:each) do
-    category_1 = create(:category, name: 'category_1')
-    category_2 = create(:category, name: 'category_2')
-    create(:product, name: 'product_1', category: category_1)
-    create(:product, name: 'product_2', category: category_2)
-  end
 
+    let!(:category_1) { create(:category, name: 'category_1') }
+    let!(:category_2) { create(:category, name: 'category_2') }
+    let!(:product_1)  { create(:product, name: 'product_1', category: category_1) }
+    let!(:product_2)  { create(:product, name: 'product_2', category: category_2) }
+  
   it 'displays all available Products' do
     visit '/'
 
