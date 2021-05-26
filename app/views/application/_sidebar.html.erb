@@ -5,3 +5,9 @@
   <% end %>
 </div>
 
+<h3 class="my-4">Brands</h4>
+<div class="list-group">
+  <% Brand.all.each do |brand|%>
+    <%= link_to brand.name, root_path(brand: brand.id), class: "list-group-item" %>
+  <% end %>
+</div>
