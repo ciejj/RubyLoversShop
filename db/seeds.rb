@@ -1,5 +1,3 @@
-require 'faker'
-
 Category.destroy_all
 
 4.times do
@@ -8,7 +6,16 @@ Category.destroy_all
   )
 end
 
+Brand.destroy_all
+
+4.times do
+  Brand.create(
+    name: Faker::Device.manufacturer
+  )
+end
+
 categories = Category.all
+brands = Brand.all
 
 Product.destroy_all
 
@@ -16,6 +23,7 @@ Product.destroy_all
   Product.create(
       name: Faker::Commerce.product_name,
       price: Faker::Number.decimal(l_digits: 2),
-      category: categories[rand(4)]
+      category: categories[rand(4)],
+      brand: brands[rand(4)]
   )
 end
