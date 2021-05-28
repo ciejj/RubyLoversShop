@@ -58,9 +58,4 @@ RSpec.describe 'Home Page', type: :system do
       assert_selector 'h4.card-title', count: 1
     end
   end
-
-
-
-
-
 end

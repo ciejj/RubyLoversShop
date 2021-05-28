@@ -1,5 +1,3 @@
-require 'faker'
-
 Category.destroy_all
 
 4.times do
