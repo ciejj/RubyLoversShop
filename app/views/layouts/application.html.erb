@@ -11,20 +11,9 @@
   <body>
     <%= render 'navigation' %>
     <%= render 'flash_messages' %>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-9">
-          <%= render 'products_carousel' %>
-
-          <%= yield %>
-        </div>
-
-        <div class="col-lg-3">
-          <%= render 'sidebar' %>
-        </div>
+      <div class="container">
+         <%= yield %>
       </div>
-    </div>
   </body>
 
   <%= javascript_pack_tag 'application' %>

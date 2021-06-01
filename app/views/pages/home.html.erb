@@ -1,8 +1,15 @@
-<div class="row">
-  <% @products.each do |product| %>
-    <%= render product%>
-  <% end %>
-</div>
+  <div class="row">
+    <div class="col-lg-9">
+      <%= render 'products_carousel' %>
 
+      <div class="row">
+        <% @products.each do |product| %>
+          <%= render product%>
+        <% end %>
+      </div>
+    </div>
 
-
+    <div class="col-lg-3">
+      <%= render 'sidebar' %>
+    </div>
+  </div>
