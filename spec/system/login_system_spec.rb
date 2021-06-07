@@ -4,9 +4,12 @@ RSpec.describe 'Login Page', type: :system do
   let!(:user) { create(:user) }
 
   context 'when providing valid details' do
-    it 'user can Log In' do
+    before do
       visit '/'
       click_on('Log In')
+    end
+    
+    it 'user can Log In' do
       fill_in 'user_email', with: user.email
       fill_in 'user_password', with: 'password'
       find('input[name="commit"]').click
@@ -14,8 +17,6 @@ RSpec.describe 'Login Page', type: :system do
     end
 
     it 'user can reset password' do
-      visit '/'
-      click_on('Log In')
       click_on('Forgot Password?')
       fill_in 'user_email', with: user.email
       find('input[name="commit"]').click
@@ -24,9 +25,12 @@ RSpec.describe 'Login Page', type: :system do
   end
 
   context 'when providing invalid details' do
-    it 'user cannot Log In with invalid password' do
+    before do
       visit '/'
       click_on('Log In')
+    end
+
+    it 'user cannot Log In with invalid password' do
       fill_in 'user_email', with: user.email
       fill_in 'user_password', with: 'wrong_password'
       find('input[name="commit"]').click
@@ -34,8 +38,6 @@ RSpec.describe 'Login Page', type: :system do
     end
 
     it 'user cannot Log In with invalid email' do
-      visit '/'
-      click_on('Log In')
       fill_in 'user_email', with: 'fake_email@example.com'
       fill_in 'user_password', with: 'wrong_password'
       find('input[name="commit"]').click
@@ -43,12 +45,32 @@ RSpec.describe 'Login Page', type: :system do
     end
 
     it 'user cannot reset password' do
-      visit '/'
-      click_on('Log In')
       click_on('Forgot Password?')
       fill_in 'user_email', with: 'fake_email@example.com'
       find('input[name="commit"]').click
       expect(page).to have_content('Email not found')
+    end
+  end
+
+  context 'when the user is Logged In' do
+    before do
+      visit '/'
+      click_on('Log In')
+      fill_in 'user_email', with: user.email
+      fill_in 'user_password', with: 'password'
+      find('input[name="commit"]').click
+    end
+
+    it 'user can see the Log Out button' do
+      expect(page).to have_link('Log Out')
+    end
+
+    it 'user cant see the Log In button' do
+      expect(page).not_to have_link('Log In')
+    end
+
+    it 'user cant see the Sign Up button' do
+      expect(page).not_to have_link('Sign Up')
     end
   end
 
