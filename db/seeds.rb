@@ -1,3 +1,10 @@
+User.destroy_all
+
+User.create(
+  email: "john@example.com",
+  password: "password"
+)
+
 Category.destroy_all
 
 4.times do
