@@ -1,7 +1,7 @@
 Admin.destroy_all
 
 Admin.create(
-  email: "admin@admin.com"
+  email: "admin@admin.com",
   password: "password"
 )
 
