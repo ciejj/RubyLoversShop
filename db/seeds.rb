@@ -1,3 +1,10 @@
+Admin.destroy_all
+
+Admin.create(
+  email: "admin@admin.com"
+  password: "password"
+)
+
 User.destroy_all
 
 User.create(
