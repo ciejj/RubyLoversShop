@@ -26,7 +26,6 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
-
   config.warden do |manager|
     manager.failure_app = CustomFailureApp
   end

@@ -32,6 +32,5 @@ RSpec.describe 'Admin Dashboard', type: :request do
         expect(response.body).to include('Admin Panel')
       end
     end
-
   end
 end

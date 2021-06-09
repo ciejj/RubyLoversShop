@@ -83,5 +83,4 @@ RSpec.configure do |config|
     }
     follow_redirect!
   end
-
 end
