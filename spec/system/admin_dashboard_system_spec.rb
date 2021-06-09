@@ -43,14 +43,11 @@ RSpec.describe 'Admin Dashboard', type: :system do
       fill_in 'admin_email', with: admin.email
       fill_in 'admin_password', with: 'password'
       find('input[name="commit"]').click
+      visit '/admin'
     end
 
-    it 'redirects to admin root path' do
+    it 'is possible to access admin root path' do
       expect(page).to have_current_path(admin_root_path)
-    end
-
-    it 'displays sign in confirmation' do
-      expect(page).to have_content('Signed in successfully.')
     end
   end
 end
