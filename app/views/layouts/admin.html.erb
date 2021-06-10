@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ruby Lovers Shop</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application' %>
+  </head>
+
+  <body>
+    <%= render 'admin/navigation' %>
+    <%= render 'flash_messages' %>
+      <div class="container">
+         <%= yield %>
+      </div>
+  </body>
+
+  <%= javascript_pack_tag 'application' %>
+</html>
