@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Dashboard', type: :request do
   let!(:user) { create(:user) }
-  let!(:admin) { create(:admin) }
+  let!(:administrator) { create(:administrator) }
 
   describe 'GET /admin' do
 
@@ -27,7 +27,7 @@ RSpec.describe 'Admin Dashboard', type: :request do
 
     context 'when logged in as Admin' do
       it 'redirects to admin root path' do
-        login_admin(admin)
+        login_administrator(administrator)
         get '/admin'
         expect(response.body).to include('Admin Panel')
       end

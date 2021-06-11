@@ -69,18 +69,18 @@ RSpec.configure do |config|
   def login_user(user)
     post user_session_path, params: {
       user: {
-        email: user.email, password: user.password
+        email: user.email, 
+        password: user.password
       }
     }
-    follow_redirect!
   end
 
-  def login_admin(admin)
-    post admin_session_path, params: {
-      admin: {
-        email: admin.email, password: admin.password
+  def login_administrator(administrator)
+    post administrator_session_path, params: {
+      administrator: {
+        email: administrator.email, 
+        password: administrator.password
       }
     }
-    follow_redirect!
   end
 end

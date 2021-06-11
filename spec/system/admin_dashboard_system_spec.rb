@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Admin Dashboard', type: :system do
   let!(:user) { create(:user) }
-  let!(:admin) { create(:admin) }
+  let!(:administrator) { create(:administrator) }
 
   context 'when not logged in' do
     before do
@@ -37,17 +37,17 @@ RSpec.describe 'Admin Dashboard', type: :system do
     end
   end
 
-  context 'when logged in as admin' do
+  context 'when logged in as administrator' do
     before do
-      visit '/admins/sign_in'
-      fill_in 'admin_email', with: admin.email
-      fill_in 'admin_password', with: 'password'
+      visit '/administrators/sign_in'
+      fill_in 'administrator_email', with: administrator.email
+      fill_in 'administrator_password', with: 'password'
       find('input[name="commit"]').click
       visit '/admin'
     end
 
     it 'is possible to access admin root path' do
-      expect(page).to have_current_path(admin_root_path)
+      expect(page).to have_current_path('/admin')
     end
   end
 end
