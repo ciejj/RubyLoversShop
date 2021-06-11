@@ -1,7 +1,11 @@
-<h2>Products</h2>
+
+<div class="d-flex justify-content-between mb-3">
+  <h2>Products</h2>
+  <%= link_to "Add Product", new_admin_product_path, class: "btn btn-dark"%>
+</div>
 
 <table class="table">
-  <thead class="table-dark"></thead>
+  <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
