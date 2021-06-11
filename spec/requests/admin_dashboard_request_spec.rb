@@ -27,7 +27,7 @@ RSpec.describe 'Admin Dashboard', type: :request do
 
     context 'when logged in as Admin' do
       let!(:product_1)  { create(:product, name: 'product_1') }
-      let!(:product_2)  { create(:product, name: 'product_1') }
+      let!(:product_2)  { create(:product, name: 'product_2') }
       before do
         login_administrator(administrator)
       end
@@ -40,7 +40,7 @@ RSpec.describe 'Admin Dashboard', type: :request do
       it 'is possible to access admin root path' do
         get '/admin/products'
         expect(response.body).to include(product_1.name)
-        expect(response.body).to include(product_1.name)
+        expect(response.body).to include(product_2.name)
       end
 
 

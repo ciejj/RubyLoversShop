@@ -39,7 +39,7 @@ RSpec.describe 'Admin Dashboard', type: :system do
 
   context 'when logged in as administrator' do
     let!(:product_1)  { create(:product, name: 'product_1') }
-    let!(:product_2)  { create(:product, name: 'product_1') }
+    let!(:product_2)  { create(:product, name: 'product_2') }
 
     before do
       visit '/administrators/sign_in'
