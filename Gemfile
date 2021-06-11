@@ -32,6 +32,7 @@ group :development do
   gem 'rubocop-rspec', require: false
   gem 'faker'
   gem 'hirb'
+  gem 'bullet'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

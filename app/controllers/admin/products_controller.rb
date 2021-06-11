@@ -4,7 +4,7 @@ module Admin
     before_action :authenticate_administrator!
 
     def index
-      @products = Product.all
+      @products = Product.includes([:category]).includes([:brand]).all
     end
 
   end
