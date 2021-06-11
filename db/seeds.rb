@@ -1,6 +1,6 @@
-Admin.destroy_all
+Administrator.destroy_all
 
-Admin.create(
+Administrator.create(
   email: "admin@admin.com",
   password: "password"
 )

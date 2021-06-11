@@ -10,12 +10,12 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <% if admin_signed_in? %>
+        <% if administrator_signed_in? %>
           <li class="nav-item active px-1">
-            <span class="navbar-text">Logged in as: <%= current_admin.email %></span>
+            <span class="navbar-text">Logged in as: <%= current_administrator.email %></span>
           </li>
           <li class="nav-item active px-1">
-            <%= link_to 'Log Out', destroy_admin_session_path, method: :delete, class:"nav-link btn btn-outline-dark btn-inverse" %>
+            <%= link_to 'Log Out', destroy_administrator_session_path, method: :delete, class:"nav-link btn btn-outline-dark btn-inverse" %>
           </li>
         <% end %>
       </ul>
