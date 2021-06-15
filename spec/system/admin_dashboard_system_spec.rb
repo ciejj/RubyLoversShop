@@ -38,6 +38,9 @@ RSpec.describe 'Admin Dashboard', type: :system do
   end
 
   context 'when logged in as administrator' do
+    let!(:product_1)  { create(:product, name: 'product_1') }
+    let!(:product_2)  { create(:product, name: 'product_2') }
+
     before do
       visit '/administrators/sign_in'
       fill_in 'administrator_email', with: administrator.email
@@ -48,6 +51,12 @@ RSpec.describe 'Admin Dashboard', type: :system do
 
     it 'is possible to access admin root path' do
       expect(page).to have_current_path('/admin')
+    end
+
+    it 'displays all products in the admin dashboard' do
+      click_on('Products')
+      expect(page).to have_css('.product-name', text: product_1.name)
+      expect(page).to have_css('.product-name', text: product_2.name)
     end
   end
 end
