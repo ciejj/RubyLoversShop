@@ -66,8 +66,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-
+  
   def login_user(user)
     post user_session_path, params: {
       user: {

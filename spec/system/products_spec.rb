@@ -15,7 +15,6 @@ RSpec.describe 'Products', type: :system do
       click_button 'Create Product'
 
       expect(page).to have_content 'Product added successfully'
-                  .and have_content 'test_product'
 
     end
 
