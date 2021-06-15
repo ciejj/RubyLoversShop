@@ -11,6 +11,7 @@
       <th scope="col">Price</th>
       <th scope="col">Category</th>
       <th scope="col">Brand</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -18,8 +19,9 @@
     <tr>
       <th scope="row" class="product-name"><%= product.name %></th>
       <td><%= product.price %></td>
-      <td><%= product.category.nil? ? '' : product.category.name unless product.category %></td>
+      <td><%= product.category.nil? ? '' : product.category.name %></td>
       <td><%= product.brand.nil? ? '' : product.brand.name %></td>
+      <td><%= link_to 'EDIT', edit_admin_product_path(product) %></td>
     </tr>
     <% end %>
   </tbody>
