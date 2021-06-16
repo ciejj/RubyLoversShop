@@ -6,7 +6,8 @@ RSpec.describe 'Products', type: :system do
   context 'when creating a new one' do
     before do
       login_as(create(:administrator))
-      visit new_admin_product_url
+      visit admin_products_path
+      find('#add-product-button').click
     end
 
     it 'is successfull with valid attributes' do
@@ -15,7 +16,6 @@ RSpec.describe 'Products', type: :system do
       click_button 'Create Product'
 
       expect(page).to have_content 'Product added successfully'
-
     end
 
     it 'fails with missing name' do
