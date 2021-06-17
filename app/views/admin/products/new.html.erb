@@ -3,7 +3,7 @@
   <h2 class="text-center">New Product</h2>
 
   <% if @product.errors.any? %>
-    <% @product.errors.full_messages.each do |message|%>
+    <% @product.errors.full_messages.each do |message| %>
     <div class="alert alert-danger" role="alert">
        <%= message %>
     </div>
@@ -14,12 +14,12 @@
 
     <div class="form-group row">
       <label for="product_name" class="col-3 col-form-label">Name</label>
-      <%= f.text_field :name, class: "form-control col-9"%>
+      <%= f.text_field :name, class: "form-control col-9" %>
     </div>
   
     <div class="form-group row">
       <label for="product_price" class="col-3 col-form-label">Price</label>
-      <%= f.text_field :price, class: "form-control col-9"%>
+      <%= f.text_field :price, class: "form-control col-9" %>
     </div>
   
     <div class="form-group row">
