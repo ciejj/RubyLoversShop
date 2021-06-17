@@ -1,7 +1,10 @@
-<h2>Products</h2>
+<div class="d-flex justify-content-between mb-3">
+  <h2>Products</h2>
+  <%= link_to "Add Product", new_admin_product_path, class: "btn btn-dark", id: "add-product-button"%>
+</div>
 
 <table class="table">
-  <thead class="table-dark"></thead>
+  <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
@@ -14,8 +17,8 @@
     <tr>
       <th scope="row" class="product-name"><%= product.name %></th>
       <td><%= product.price %></td>
-      <td><%= product.category.name %></td>
-      <td><%= product.brand.name %></td>
+      <td><%= product&.category&.name %></td>
+      <td><%= product&.brand&.name %></td>
     </tr>
     <% end %>
   </tbody>
