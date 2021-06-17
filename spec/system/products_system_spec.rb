@@ -16,7 +16,7 @@ RSpec.describe 'Products', type: :system do
         find('#add-product-button').click
         fill_in 'product_name', with: product_params[:name]
         fill_in 'product_price', with: product_params[:price]
-        click_button 'Create Product'
+        click_button 'Save Product'
       end
 
       it 'adds new product' do
@@ -39,7 +39,7 @@ RSpec.describe 'Products', type: :system do
       before do
         find('#add-product-button').click
         fill_in 'product_name', with: product_name
-        click_button 'Create Product'
+        click_button 'Save Product'
       end
 
       it 'displays missing price error' do
@@ -58,7 +58,7 @@ RSpec.describe 'Products', type: :system do
       before do
         find('#add-product-button').click
         fill_in 'product_price', with: product_price
-        click_button 'Create Product'
+        click_button 'Save Product'
       end
 
       it 'displays an error' do
