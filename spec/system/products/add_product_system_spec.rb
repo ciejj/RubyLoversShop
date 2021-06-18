@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Products', type: :system do
+RSpec.describe 'Adding Product', type: :system do
   context 'when logged in as admin' do
     before do
-      login_as(create(:administrator))
+      login_as(create(:administrator), scope: :administrator)
       visit admin_products_path
     end
 
-    context 'when adding product with valid attributes' do
+    context 'with valid product attributes' do
       let(:product_params) { attributes_for(:product) }
 
       before do
@@ -19,7 +19,7 @@ RSpec.describe 'Products', type: :system do
         click_button 'Create Product'
       end
 
-      it 'adds new product' do
+      it 'is successful' do
         expect(page).to have_content 'Product added successfully'
       end
 
@@ -33,7 +33,7 @@ RSpec.describe 'Products', type: :system do
       end
     end
 
-    context 'when adding product without price' do
+    context 'with missing price' do
       let(:product_name) { 'product_with_no_price' }
 
       before do
@@ -46,13 +46,13 @@ RSpec.describe 'Products', type: :system do
         expect(page).to have_content 'Price can\'t be blank'
       end
 
-      it 'is not adding new product' do
+      it 'does not add new product' do
         visit '/'
         expect(page).to have_no_content product_name
       end
     end
 
-    context 'when adding product without name' do
+    context 'with missing name' do
       let(:product_price) { 1 }
 
       before do
@@ -61,14 +61,43 @@ RSpec.describe 'Products', type: :system do
         click_button 'Create Product'
       end
 
-      it 'displays an error' do
+      it 'displays missing name error' do
         expect(page).to have_content 'Name can\'t be blank'
       end
 
-      it 'is not adding new product' do
+      it 'does not add new product' do
         visit '/'
         expect(page).to have_no_content product_price
       end
+    end
+  end
+
+  context 'when logged in as user' do
+    before do
+      login_as(create(:user), scope: :user)
+      visit admin_products_path
+    end
+
+    it 'redirects to root path' do
+      expect(page).to have_current_path(root_path)
+    end
+
+    it 'displays unauthorized warning' do
+      expect(page).to have_content('You are not authorized.')
+    end
+  end
+
+  context 'when not logged in' do
+    before do
+      visit admin_products_path
+    end
+
+    it 'redirects to root path' do
+      expect(page).to have_current_path(root_path)
+    end
+
+    it 'displays unauthorized warning' do
+      expect(page).to have_content('You are not authorized.')
     end
   end
 end
