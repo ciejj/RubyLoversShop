@@ -4,8 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'Adding Product', type: :system do
   context 'when logged in as admin' do
+    let!(:administrator) { create(:administrator) }
+
     before do
-      login_as(create(:administrator), scope: :administrator)
+      login_as(administrator, scope: :administrator)
       visit admin_products_path
     end
 

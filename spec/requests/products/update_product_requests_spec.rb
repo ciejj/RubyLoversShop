@@ -8,8 +8,10 @@ RSpec.describe 'PATCH /admin/prodcts/:id', type: :request do
   let(:new_price) { 123_456 }
 
   context 'when logged in as administrator' do
+    let!(:administrator) { create(:administrator) }
+
     before do
-      login_administrator(create(:administrator))
+      login_as(administrator, scope: :administrator)
     end
 
     context 'with valid parameters' do
@@ -51,8 +53,10 @@ RSpec.describe 'PATCH /admin/prodcts/:id', type: :request do
   end
 
   context 'when logged in as user' do
+    let!(:user) { create(:user) }
+
     before do
-      login_user(create(:user))
+      login_as(user, scope: :user)
     end
 
     context 'with valid parameters' do

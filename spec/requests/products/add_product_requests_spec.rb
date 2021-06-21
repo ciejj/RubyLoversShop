@@ -4,8 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'POST /admin/prodcts/create', type: :request do
   context 'when logged in as administrator' do
+    let!(:administrator) { create(:administrator) }
+
     before do
-      login_as(create(:administrator), scope: :administrator)
+      login_as(administrator, scope: :administrator)
     end
 
     context 'with valid parameters' do
@@ -41,9 +43,10 @@ RSpec.describe 'POST /admin/prodcts/create', type: :request do
 
   context 'when user is logged in' do
     let(:product_params) { attributes_for(:product) }
+    let!(:user) { create(:user) }
 
     before do
-      login_as(create(:user), scope: :user)
+      login_as(user, scope: :user)
     end
 
     it 'does not add add a product' do

@@ -4,10 +4,11 @@ require 'rails_helper'
 
 RSpec.describe 'Editing Product', type: :system do
   context 'when logged in as admin' do
+    let!(:administrator) { create(:administrator) }
     let!(:product) { create(:product) }
 
     before do
-      login_as(create(:administrator), scope: :administrator)
+      login_as(administrator, scope: :administrator)
       visit admin_products_path
     end
 

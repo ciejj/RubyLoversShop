@@ -32,7 +32,6 @@ module Admin
 
       if @product.update(product_params)
         redirect_to admin_products_path, notice: 'Product edited successfully'
-
       else
         render :edit
       end
