@@ -27,7 +27,6 @@ RSpec.describe 'GET /admin/', type: :request do
     before do
       login_as(user, scope: :user)
       get '/admin'
-      follow_redirect!
     end
 
     it 'redirects to root path' do
@@ -35,6 +34,7 @@ RSpec.describe 'GET /admin/', type: :request do
     end
 
     it 'informs about lack of authorization' do
+      follow_redirect!
       expect(response.body).to include('You are not authorized.')
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe 'GET /admin/', type: :request do
   context 'when not logged in' do
     before do
       get '/admin'
-      follow_redirect!
+
     end
 
     it 'redirects to root path' do
@@ -50,6 +50,7 @@ RSpec.describe 'GET /admin/', type: :request do
     end
 
     it 'informs about lack of authorization' do
+      follow_redirect!
       expect(response.body).to include('You are not authorized.')
     end
   end
