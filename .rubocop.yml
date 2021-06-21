@@ -17,6 +17,9 @@ Metrics/ClassLength:
   Max: 200
 Metrics/MethodLength:
   Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
 Style/BlockComments:
   Enabled: false
 Bundler/OrderedGems:

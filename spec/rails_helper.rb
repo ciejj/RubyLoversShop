@@ -34,7 +34,8 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
-
+  config.include Warden::Test::Helpers
+  config.formatter = :documentation
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -69,7 +70,7 @@ RSpec.configure do |config|
   def login_user(user)
     post user_session_path, params: {
       user: {
-        email: user.email, 
+        email: user.email,
         password: user.password
       }
     }
@@ -78,7 +79,7 @@ RSpec.configure do |config|
   def login_administrator(administrator)
     post administrator_session_path, params: {
       administrator: {
-        email: administrator.email, 
+        email: administrator.email,
         password: administrator.password
       }
     }
