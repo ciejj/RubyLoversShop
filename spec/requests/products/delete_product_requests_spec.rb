@@ -13,7 +13,7 @@ RSpec.describe 'DELETE /admin/prodcts/:id', type: :request do
     end
 
     it 'deletes a product' do
-      expect do 
+      expect do
         delete admin_product_path(product)
       end.to change(Product, :count).by(-1)
     end
@@ -27,7 +27,7 @@ RSpec.describe 'DELETE /admin/prodcts/:id', type: :request do
     end
 
     it 'does not delete a product' do
-      expect do 
+      expect do
         delete admin_product_path(product)
       end.not_to change(Product, :count)
     end
@@ -35,7 +35,7 @@ RSpec.describe 'DELETE /admin/prodcts/:id', type: :request do
 
   context 'when not logged in' do
     it 'does not delete a product' do
-      expect do 
+      expect do
         delete admin_product_path(product)
       end.not_to change(Product, :count)
     end
