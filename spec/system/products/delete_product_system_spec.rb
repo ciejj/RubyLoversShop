@@ -24,6 +24,11 @@ RSpec.describe 'Deleting Product', type: :system do
       it 'removes product from product index' do
         expect(page).not_to have_content product.name
       end
+
+      it 'removes product from the home page' do
+        visit '/'
+        expect(page).not_to have_content product.name
+      end
     end
   end
 end
