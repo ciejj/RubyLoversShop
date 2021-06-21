@@ -42,7 +42,6 @@ RSpec.describe 'GET /admin/', type: :request do
   context 'when not logged in' do
     before do
       get '/admin'
-
     end
 
     it 'redirects to root path' do
