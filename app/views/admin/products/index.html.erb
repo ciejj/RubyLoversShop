@@ -23,6 +23,8 @@
       <td>
         <%= link_to "edit", edit_admin_product_path(product), 
           class: "btn btn-outline-secondary btn-sm", id: "edit-product-#{product.id}-button" %>
+        <%= link_to "delete",  admin_product_path(product), method: :delete, 
+          data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm", id: "edit-product-#{product.id}-button" %>
       </td>
     </tr>
     <% end %>
