@@ -20,7 +20,8 @@ RSpec.describe 'Visiting Admin Dashboard', type: :system do
 
     it 'displays all products in the admin dashboard' do
       click_on('Products')
-      expect(page).to have_css('.product-name', text: product1.name).and  have_css('.product-name', text: product2.name)
+      expect(page).to have_css('.product-name', text: product1.name)
+        .and have_css('.product-name', text: product2.name)
     end
   end
 
