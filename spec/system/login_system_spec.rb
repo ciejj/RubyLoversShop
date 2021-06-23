@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Login Page', type: :system do
@@ -8,7 +10,7 @@ RSpec.describe 'Login Page', type: :system do
       visit '/'
       click_on('Log In')
     end
-    
+
     it 'user can Log In' do
       fill_in 'user_email', with: user.email
       fill_in 'user_password', with: 'password'
@@ -20,7 +22,8 @@ RSpec.describe 'Login Page', type: :system do
       click_on('Forgot Password?')
       fill_in 'user_email', with: user.email
       find('input[name="commit"]').click
-      expect(page).to have_content('You will receive an email with instructions on how to reset your password in a few minutes.')
+      expect(page).to have_content('You will receive an email with '\
+        'instructions on how to reset your password in a few minutes.')
     end
   end
 
@@ -74,7 +77,7 @@ RSpec.describe 'Login Page', type: :system do
     end
   end
 
-  context 'when visitng the Home Page' do 
+  context 'when visitng the Home Page' do
     it 'Log In button is visible' do
       visit '/'
 
@@ -82,7 +85,7 @@ RSpec.describe 'Login Page', type: :system do
     end
   end
 
-  context 'when visitng the Sign Up Page' do 
+  context 'when visitng the Sign Up Page' do
     it 'Log In button is visible' do
       visit '/'
       click_on('Sign Up')

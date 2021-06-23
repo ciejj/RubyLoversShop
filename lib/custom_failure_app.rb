@@ -1,6 +1,7 @@
-class CustomFailureApp < Devise::FailureApp
+# frozen_string_literal: true
 
-  def route(scope)
+class CustomFailureApp < Devise::FailureApp
+  def route(*)
     :root_url
   end
 end
