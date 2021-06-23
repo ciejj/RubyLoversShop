@@ -1,0 +1,41 @@
+<div class="col-lg-6 offset-lg-3">
+  <% if product.errors.any? %>
+    <% product.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger" role="alert">
+       <%= message %>
+    </div>
+    <%end%>
+  <%end%>
+
+  <%= form_with model: [:admin, product], local: true do |f| %>
+
+    <div class="form-group row">
+      <label for="product_name" class="col-3 col-form-label">Name</label>
+      <%= f.text_field :name, class: "form-control col-9" %>
+    </div>
+  
+    <div class="form-group row">
+      <label for="product_price" class="col-3 col-form-label">Price</label>
+      <%= f.text_field :price, class: "form-control col-9" %>
+    </div>
+  
+    <div class="form-group row">
+      <label for="product_category_id" class="col-3 col-form-label">Category</label>
+      <%= f.collection_select(:category_id, Category.all, :id, :name,{ :include_blank => true }, { class: "form-control col-9" })  %>
+    </div>
+    
+    <div class="form-group row">
+      <label for="product_brand_id" class="col-3 col-form-label">Brand</label>
+      <%= f.collection_select(:brand_id, Brand.all, :id, :name, { :include_blank => true }, { class: "form-control col-9" })  %>
+    </div>
+  
+    <div class="form-group row">
+       <label for="product_brand_id" class="col-3 col-form-label">Main Image</label>
+      <%= f.file_field :main_image, accept: "image/*", class: "btn btn-outline-secondary btn-block col-9" %>
+    </div>
+   
+    <div class="form-group row">
+      <%= f.submit "Save Product", class: "btn btn-outline-secondary btn-inverse btn-block" %>
+    </div>
+  <% end %>
+</div>
