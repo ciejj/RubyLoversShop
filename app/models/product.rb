@@ -13,5 +13,3 @@ class Product < ApplicationRecord
     main_image.attached? ? main_image : 'main_image_placeholder.png'
   end
 end
-
-
