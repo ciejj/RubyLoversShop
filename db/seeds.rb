@@ -1,5 +1,3 @@
-require 'open-uri'
-
 Administrator.create_with(password: 'password').find_or_create_by(email: 'admin@admin.com')
 User.create_with(password: 'password').find_or_create_by(email: 'user@admin.com')
 
