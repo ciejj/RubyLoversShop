@@ -1,19 +1,7 @@
-Administrator.destroy_all
-
-Administrator.create(
-  email: "admin@admin.com",
-  password: "password"
-)
-
-User.destroy_all
-
-User.create(
-  email: "john@example.com",
-  password: "password"
-)
+Administrator.create_with(password: 'password').find_or_create_by(email: 'admin@admin.com')
+User.create_with(password: 'password').find_or_create_by(email: 'user@admin.com')
 
 Category.destroy_all
-
 4.times do
   Category.create(
     name: Faker::Commerce.unique.department(max: 1)
@@ -21,7 +9,6 @@ Category.destroy_all
 end
 
 Brand.destroy_all
-
 4.times do
   Brand.create(
     name: Faker::Device.unique.manufacturer
@@ -32,7 +19,6 @@ categories = Category.all
 brands = Brand.all
 
 Product.destroy_all
-
 15.times do 
   Product.create(
       name: Faker::Commerce.unique.product_name,
