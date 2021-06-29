@@ -23,7 +23,7 @@ RSpec.describe 'Login Page', type: :system do
       fill_in 'user_email', with: user.email
       find('input[name="commit"]').click
       expect(page).to have_content('You will receive an email with '\
-        'instructions on how to reset your password in a few minutes.')
+                                   'instructions on how to reset your password in a few minutes.')
     end
   end
 
