@@ -1,3 +1,6 @@
+<% if @cart.empty? %>
+YOUR CART IS EMPTY
+<% else %>
 <ul>
   <% @cart.line_items.each do |line_item| %>
   <li>
@@ -6,3 +9,6 @@
   <% end %>
 </ul>
 <p id="cart_total"><strong>Total: $<%= @cart.total%></strong></p>
+
+  <%= link_to "Empty cart", cart_path(@cart), method: :delete, data: {confirm: "Do you really want to empty the cart?"} %>
+<% end %>
