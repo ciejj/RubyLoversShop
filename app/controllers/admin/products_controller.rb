@@ -2,7 +2,6 @@
 
 module Admin
   class ProductsController < AdminController
-
     def index
       @products = Product.includes([:category]).includes([:brand]).all
     end
