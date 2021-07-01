@@ -1,14 +1,9 @@
+<div class="d-flex justify-content-between  align-items-center mb-3">
+  <h2>Shopping Cart</h2>
+</div>
 <% if @cart.empty? %>
 YOUR CART IS EMPTY
 <% else %>
-<ul>
-  <% @cart.line_items.each do |line_item| %>
-  <li>
-    <%= line_item.product.name %>  <%= line_item.product.price  %>  
-  </li>
-  <% end %>
-</ul>
-<p id="cart_total"><strong>Total: $<%= @cart.total%></strong></p>
-
-  <%= link_to "Empty cart", cart_path(@cart), method: :delete, data: {confirm: "Do you really want to empty the cart?"} %>
+  <%= render partial: "cart_contents", locals: {cart: @cart} %>
 <% end %>
+
