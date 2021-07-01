@@ -13,4 +13,6 @@ class Cart < ApplicationRecord
 
     line_items.build(product_id: product.id) unless current_item
   end
+
+  delegate :empty?, to: :line_items
 end
