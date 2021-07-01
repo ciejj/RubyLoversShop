@@ -1,0 +1,8 @@
+<ul>
+  <% @cart.line_items.each do |line_item| %>
+  <li>
+    <%= line_item.product.name %>  <%= line_item.product.price  %>  
+  </li>
+  <% end %>
+</ul>
+<p id="cart_total"><strong>Total: $<%= @cart.total%></strong></p>

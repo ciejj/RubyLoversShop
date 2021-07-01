@@ -8,4 +8,7 @@ Rails.application.routes.draw do
     root to: "products#index", :as => :administrator_root
     resources :products
   end
+
+  get 'carts/:id', to: "carts#show", as: "cart"
+  post 'carts', to: "carts#add", as: "add_to_cart"
 end

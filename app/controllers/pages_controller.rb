@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
+  before_action :initialize_cart
+
   def home
     @active_filters = filters_params || { filters: '' }
     @products = Product.all.with_attached_main_image
