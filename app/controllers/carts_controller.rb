@@ -2,10 +2,8 @@
 
 class CartsController < ApplicationController
   before_action :authenticate_user!
-  before_action :initialize_cart
 
   def show
-    @cart = Cart.find(params[:id])
     @line_items = @cart.line_items.includes(:product, product: {main_image_attachment: :blob})
   end
 
