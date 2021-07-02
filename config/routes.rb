@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :products
   end
 
-  get 'carts/:id', to: "carts#show", as: "cart"
-  delete 'carts/:id', to: "carts#destroy"
+  resources :products, only: %i[show]
+
+  get 'cart', to: "carts#show"
+  delete 'cart', to: "carts#destroy"
   post 'carts', to: "carts#add", as: "add_to_cart"
 end
