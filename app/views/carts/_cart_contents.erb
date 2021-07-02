@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        <% cart.line_items.each do |line_item| %>
+        <% line_items.each do |line_item| %>
         <tr>
           <td> <%= image_tag(line_item.product.main_image_path, class: 'card-img-top', style: "width: 140px; height: 80px;") %> </td>
           <th scope="row" class="product-name"><%= line_item.product.name %></th>

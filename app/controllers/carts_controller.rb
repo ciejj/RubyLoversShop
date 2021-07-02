@@ -6,6 +6,7 @@ class CartsController < ApplicationController
 
   def show
     @cart = Cart.find(params[:id])
+    @line_items = @cart.line_items.includes(:product, product: {main_image_attachment: :blob})
   end
 
   def add
