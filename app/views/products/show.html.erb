@@ -7,7 +7,7 @@
       <h4 class="card-title">
         <%= @product.name %>
       </h4>
-      <p>Brand: <%= @product.brand.name %></p>
+      <p>Brand: <%= @product.brand&.name %></p>
       <h5><%= @product.price %> USD</h5>
       <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
     </div>
