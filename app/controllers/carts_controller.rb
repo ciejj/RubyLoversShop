@@ -8,10 +8,13 @@ class CartsController < ApplicationController
   end
 
   def add
-    product = Product.find(params[:product_id])
-    result = AddProductToCart.call(product: product, cart: @cart)
+    result = AddProductToCart.new.call(product_id: params[:product_id], cart: @cart)
 
-    flash[:notice] = result.message
+    flash[:notice] = if result.success?
+                       result.value!
+                     else
+                       result.failure
+                     end
 
     redirect_back(fallback_location: root_path)
   end
