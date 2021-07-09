@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :products, only: %i[show]
+  resources :orders, only: %i[create]
 
   get 'cart', to: "carts#show"
   delete 'cart', to: "carts#destroy"
