@@ -4,6 +4,6 @@
 <% if @cart.empty? %>
 YOUR CART IS EMPTY
 <% else %>
-  <%= render partial: "cart_contents", locals: {cart: @cart, line_items: @line_items} %>
+  <%= render partial: "cart_contents", locals: {cart: @cart, cart_items: @cart_items} %>
 <% end %>
 

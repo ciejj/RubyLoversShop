@@ -4,7 +4,7 @@ class CartsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @line_items = @cart.line_items.includes(:product, product: { main_image_attachment: :blob })
+    @cart_items = @cart.cart_items.includes(:product, product: { main_image_attachment: :blob })
   end
 
   def add

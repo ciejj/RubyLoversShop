@@ -7,10 +7,10 @@ class AddProductToCart
 
   def call(cart:, product_id:)
     find_product(product_id).bind do |product|
-      if cart.line_items.find_by(product_id: product.id)
+      if cart.cart_items.find_by(product_id: product.id)
         Failure("#{product.name} is already in the cart")
       else
-        LineItem.create(product: product, cart: cart)
+        CartItem.create(product: product, cart: cart)
         Success("Added #{product.name} to the cart")
       end
     end

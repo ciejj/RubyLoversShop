@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LineItem < ApplicationRecord
+class CartItem < ApplicationRecord
   belongs_to :product
   belongs_to :cart
 
