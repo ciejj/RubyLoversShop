@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-9">
+    <table class="table table-hover">
+      <thead class="thead">
+        <tr>
+          <th></th>
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% cart_items.each do |cart_item| %>
+        <tr>
+          <td> <%= image_tag(cart_item.product.main_image_path, class: 'card-img-top', style: "width: 140px; height: 80px;") %> </td>
+          <th scope="row" class="product-name"><%= cart_item.product.name %></th>
+          <td><%= cart_item.product.price %></td>
+        </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+  </div>
+   <div class="col-md-3">
+     <div>
+     <h3>Total: $<%= cart.total%></h3>
+     </div>
+     <div>
+       <%= link_to "Empty Cart", cart_path, method: :delete, data: { confirm: "Do you really want to empty the cart?" },
+                               class: "btn btn-block btn-outline-danger" %>
+     </div>
+   <div>
+</div>
+

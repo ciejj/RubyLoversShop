@@ -8,4 +8,10 @@ Rails.application.routes.draw do
     root to: "products#index", :as => :administrator_root
     resources :products
   end
+
+  resources :products, only: %i[show]
+
+  get 'cart', to: "carts#show"
+  delete 'cart', to: "carts#destroy"
+  post 'cart', to: "carts#add", as: "add_to_cart"
 end
