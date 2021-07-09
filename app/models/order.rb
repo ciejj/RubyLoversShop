@@ -2,5 +2,5 @@
 
 class Order < ApplicationRecord
   belongs_to :user
-  enum state: { new: 1, failed: 2, completed: 3 }, _suffix: :order
+  enum state: { new: 1, failed: 2, completed: 3 }, _prefix: :state
 end
