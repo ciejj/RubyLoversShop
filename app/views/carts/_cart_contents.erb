@@ -9,11 +9,11 @@
         </tr>
       </thead>
       <tbody>
-        <% line_items.each do |line_item| %>
+        <% cart_items.each do |cart_item| %>
         <tr>
-          <td> <%= image_tag(line_item.product.main_image_path, class: 'card-img-top', style: "width: 140px; height: 80px;") %> </td>
-          <th scope="row" class="product-name"><%= line_item.product.name %></th>
-          <td><%= line_item.product.price %></td>
+          <td> <%= image_tag(cart_item.product.main_image_path, class: 'card-img-top', style: "width: 140px; height: 80px;") %> </td>
+          <th scope="row" class="product-name"><%= cart_item.product.name %></th>
+          <td><%= cart_item.product.price %></td>
         </tr>
         <% end %>
 
