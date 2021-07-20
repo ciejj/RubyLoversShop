@@ -30,7 +30,7 @@ categories = Category.all
 brands = Brand.all
 
 Product.destroy_all
-15.times do 
+20.times do 
   p = Product.create(
       name: Faker::Commerce.unique.product_name,
       price: Faker::Number.decimal(l_digits: 2),
@@ -48,7 +48,7 @@ users = User.all
 puts 'generating Orders'
 
 Order.destroy_all
-15.times do
+25.times do
   Order.create(state: rand(1..3), user: users[rand(4)])
 end
 
