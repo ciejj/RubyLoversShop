@@ -15,6 +15,7 @@ gem 'devise'
 gem 'faker'
 gem 'aws-sdk-s3', require: false
 gem 'dry-monads'
+gem 'pagy'
 
 group :test do
   gem 'capybara'

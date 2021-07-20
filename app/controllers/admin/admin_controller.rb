@@ -2,6 +2,8 @@
 
 module Admin
   class AdminController < ApplicationController
+    include Pagy::Backend
+
     before_action :administrator_authentication
 
     layout 'admin'
