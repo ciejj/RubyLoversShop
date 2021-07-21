@@ -5,8 +5,6 @@ require 'rails_helper'
 RSpec.describe 'Visiting Admin Dashboard', type: :system do
   let!(:user) { create(:user) }
   let!(:administrator) { create(:administrator) }
-  let!(:product1)  { create(:product, name: 'product1') }
-  let!(:product2)  { create(:product, name: 'product2') }
 
   context 'when logged in as administrator' do
     before do
@@ -16,12 +14,6 @@ RSpec.describe 'Visiting Admin Dashboard', type: :system do
 
     it 'is possible to access admin root path' do
       expect(page).to have_current_path('/admin')
-    end
-
-    it 'displays all products in the admin dashboard' do
-      click_on('Products')
-      expect(page).to have_css('.product-name', text: product1.name)
-        .and have_css('.product-name', text: product2.name)
     end
   end
 
