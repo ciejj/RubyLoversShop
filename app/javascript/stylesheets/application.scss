@@ -1,1 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
+
+tr {
+    max-height: 45px !important;
+    height: 45px !important;
+    vertical-align: middle;
+ }
