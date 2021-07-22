@@ -8,22 +8,21 @@ class CreateOrder
   def call(cart:, user:)
     Order.transaction do
       cart = yield validate_cart(cart)
-      yield create_order(user)
-      clear_cart(cart)
+      order = yield create_order(user)
+      yield add_products_to_order(order, cart)
+      yield clear_cart(cart)
 
-      Success('Order has been placed')
+      Success("Order has been placed with id: #{order.id}")
     end
   end
 
   private
 
-  def clear_cart(cart)
-    cart.cart_items.destroy_all
-
+  def validate_cart(cart)
     if cart.empty?
-      Success(cart)
+      Failure('Can\'t place order with an empty cart')
     else
-      Failure('Cart could not be emptied')
+      Success(cart)
     end
   end
 
@@ -37,11 +36,25 @@ class CreateOrder
     end
   end
 
-  def validate_cart(cart)
-    if cart.empty?
-      Failure('Can\'t place order with an empty cart')
+  def add_products_to_order(order, cart)
+    cart.cart_items.each do |cart_item|
+      OrderItem.create(product: cart_item.product, order: order)
+    end
+
+    if cart.cart_items.count == order.order_items.count
+      Success('Products copied to order successfully')
     else
+      Failure('Adding products to order has failed')
+    end
+  end
+
+  def clear_cart(cart)
+    cart.cart_items.destroy_all
+
+    if cart.empty?
       Success(cart)
+    else
+      Failure('Cart could not be emptied')
     end
   end
 end
