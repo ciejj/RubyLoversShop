@@ -16,6 +16,7 @@ gem 'faker'
 gem 'aws-sdk-s3', require: false
 gem 'dry-monads'
 gem 'pagy'
+gem 'aasm', '~> 5.2'
 
 group :test do
   gem 'capybara'
