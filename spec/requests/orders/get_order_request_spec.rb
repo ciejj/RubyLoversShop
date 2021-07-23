@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require_relative '../shared/request_restricted_to_administrators'
 
-RSpec.describe 'GET /order/:id', type: :request do
+RSpec.describe 'GET /orders/:id', type: :request do
   let!(:order) { create(:order) }
   let!(:order_item) { create(:order_item, order: order) }
 
@@ -21,36 +22,7 @@ RSpec.describe 'GET /order/:id', type: :request do
     end
   end
 
-  context 'when logged in as User' do
-    let!(:user) { create(:user) }
-
-    before do
-      login_as(user, scope: :user)
-      get "/admin/orders/#{order.id}"
-    end
-
-    it 'redirects to root path' do
-      expect(response).to redirect_to(root_path)
-    end
-
-    it 'informs about lack of authorization' do
-      follow_redirect!
-      expect(response.body).to include('You are not authorized.')
-    end
-  end
-
-  context 'when not logged in' do
-    before do
-      get "/admin/orders/#{order.id}"
-    end
-
-    it 'redirects to root path' do
-      expect(response).to redirect_to(root_path)
-    end
-
-    it 'informs about lack of authorization' do
-      follow_redirect!
-      expect(response.body).to include('You are not authorized.')
-    end
+  it_behaves_like 'request restricted to administrators' do
+    let(:path) { "/admin/orders/#{order.id}" }
   end
 end
