@@ -1,0 +1,19 @@
+<h4 class="mb-3 mt-3">Payment details</h4>
+<li class="list-group-item d-flex justify-content-between lh-condensed">
+  <div>
+    <h6>Payment id: </h6>
+  </div>
+  <span class="order-id text-muted"><%= payment.id %></span>
+</li>  
+<li class="list-group-item d-flex justify-content-between lh-condensed">
+  <div>
+    <h6>State:</h6>
+  </div>
+  <span class="order-state text-muted"><%= payment.aasm_state %></span>
+</li>
+ <li class="list-group-item d-flex justify-content-between lh-condensed">
+  <div>
+    <h6>Updated at:</h6>
+  </div>
+  <span class="order-state text-muted"><%= payment.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
+</li>

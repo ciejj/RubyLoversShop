@@ -1,0 +1,25 @@
+<h4 class="mb-3">Order details</h4>
+<li class="list-group-item d-flex justify-content-between lh-condensed">
+  <div>
+    <h6>Order id: </h6>
+  </div>
+  <span class="order-id text-muted"><%= order.id %></span>
+</li>  
+<li class="list-group-item d-flex justify-content-between lh-condensed">
+  <div>
+    <h6 class="order-user">User:</h6>
+  </div>
+  <span class="order-user text-muted"><%= order.user.email %></span>
+</li>  
+<li class="list-group-item d-flex justify-content-between lh-condensed">
+  <div>
+    <h6>State:</h6>
+  </div>
+  <span class="order-state text-muted"><%= order.state %></span>
+</li>
+ <li class="list-group-item d-flex justify-content-between lh-condensed">
+  <div>
+    <h6>Created at:</h6>
+  </div>
+  <span class="order-state text-muted"><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+</li>
