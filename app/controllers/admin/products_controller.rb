@@ -3,7 +3,7 @@
 module Admin
   class ProductsController < AdminController
     def index
-      @products = Product.includes(:category, :brand).all
+      @pagy, @products = pagy(Product.includes(:category, :brand).all)
     end
 
     def new
