@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'request restricted to administrators' do
+RSpec.shared_examples 'request for administrators only' do
 
   context 'when logged in as User' do
     let!(:user) { create(:user) }
