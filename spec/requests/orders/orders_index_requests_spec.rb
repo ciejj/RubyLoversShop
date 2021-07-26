@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require_relative '../shared/request_restricted_to_administrators'
+require_relative '../shared/request_for_administrators_only'
 
 RSpec.describe 'GET /admin/orders', type: :request do
   let!(:administrator) { create(:administrator) }
@@ -23,7 +23,7 @@ RSpec.describe 'GET /admin/orders', type: :request do
     end
   end
 
-  it_behaves_like 'request restricted to administrators' do
+  it_behaves_like 'request for administrators only' do
     let(:path) { '/admin/orders' }
   end
 end
