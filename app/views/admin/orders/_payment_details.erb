@@ -1,34 +1,39 @@
+<div class="payment-details">
 <h4 class="mb-3 mt-3">Payment details</h4>
-<li class="list-group-item d-flex justify-content-between lh-condensed">
-  <div>
-    <h6>Payment id: </h6>
-  </div>
-  <span class="order-id text-muted"><%= payment.id %></span>
-</li>  
-<li class="list-group-item d-flex justify-content-between lh-condensed">
-  <div>
-    <h6>State:</h6>
-  </div>
-  <span class="order-state text-muted"><%= payment.state %></span>
-</li>
-<li class="list-group-item d-flex justify-content-between lh-condensed">
-  <div>
-    <h6>Updated at:</h6>
-  </div>
-  <span class="order-state text-muted"><%= payment.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
-</li>
-<li class="list-group-item d-flex justify-content-between lh-condensed">
-
+  <li class="list-group-item d-flex justify-content-between lh-condensed payment-id">
+    <div>
+      <h6>Payment id: </h6>
+    </div>
+    <span class="order-id text-muted"><%= payment.id %></span>
+  </li>  
+  <li class="list-group-item d-flex justify-content-between lh-condensed payment-state">
+    <div>
+      <h6>State:</h6>
+    </div>
+    <span class="text-muted"><%= payment.state %></span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between lh-condensed payment-update">
+    <div>
+      <h6>Updated at:</h6>
+    </div>
+    <span class="text-muted"><%= payment.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
+  </li>
   <% Payments::StateService.new(payment).possible_events.tap do |events| %>
-      <% if events.include? :complete %>
-      <div>        
-        <%= link_to "Complete", admin_complete_payment_path(payment), method: :patch, class: "btn btn-outline-success btn-block" %>
-      </div>
-      <% end %>
-      <% if events.include? :fail %>
-      <div>
-        <%= link_to "Fail", admin_fail_payment_path(payment), method: :patch, class: "btn btn-outline-danger btn-block" %>
-      </div>
-  <% end %>
+    <% if events.any? %>
+      <li class="list-group-item d-flex justify-content-between lh-condensed payment-events">
+        <% if events.include? :complete %>
+          <div>        
+            <%= link_to "Complete", admin_complete_payment_path(payment), 
+              method: :patch, class: "btn btn-outline-success btn-block complete-payment" %>
+          </div>
+        <% end %>
+        <% if events.include? :fail %>
+            <div>
+              <%= link_to "Fail", admin_fail_payment_path(payment), 
+                method: :patch, class: "btn btn-outline-danger btn-block fail-payment" %>
+            </div>
+        <% end %>
+      </li>
     <% end %>
-</li>
+  <% end %>
+</div>
