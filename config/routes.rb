@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "products#index", :as => :administrator_root
     resources :products
-    resources :orders, only: %i[index]
+    resources :orders, only: %i[index show]
   end
 
   resources :products, only: %i[show]
