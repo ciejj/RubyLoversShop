@@ -9,11 +9,26 @@
   <div>
     <h6>State:</h6>
   </div>
-  <span class="order-state text-muted"><%= payment.aasm_state %></span>
+  <span class="order-state text-muted"><%= payment.state %></span>
 </li>
- <li class="list-group-item d-flex justify-content-between lh-condensed">
+<li class="list-group-item d-flex justify-content-between lh-condensed">
   <div>
     <h6>Updated at:</h6>
   </div>
   <span class="order-state text-muted"><%= payment.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
+</li>
+<li class="list-group-item d-flex justify-content-between lh-condensed">
+
+  <% Payments::StateService.new(payment).possible_events.tap do |events| %>
+      <% if events.include? :complete %>
+      <div>        
+        <%= link_to "Complete", admin_complete_payment_path(payment), method: :patch, class: "btn btn-outline-success btn-block" %>
+      </div>
+      <% end %>
+      <% if events.include? :fail %>
+      <div>
+        <%= link_to "Fail", admin_fail_payment_path(payment), method: :patch, class: "btn btn-outline-danger btn-block" %>
+      </div>
+  <% end %>
+    <% end %>
 </li>

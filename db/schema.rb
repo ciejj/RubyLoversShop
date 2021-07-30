@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_153558) do
     t.bigint "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "aasm_state"
+    t.string "state", default: "pending"
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
