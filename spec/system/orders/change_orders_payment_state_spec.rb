@@ -8,7 +8,6 @@ RSpec.describe 'Changing Order\'s Payment state', type: :system do
 
   context 'when logged in as administrator' do
     before do
-      create(:order_item, order: order)
       login_as(administrator, scope: :administrator)
       visit '/admin'
       click_link 'Orders'
