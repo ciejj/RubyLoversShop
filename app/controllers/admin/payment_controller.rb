@@ -5,12 +5,20 @@ module Admin
     before_action :set_payment, only: %i[complete fail]
 
     def complete
-      Payments::StateService.new(@payment).complete!
+      if Payments::StateService.new(@payment).complete!
+        flash[:notice] = 'Payment completed'
+      else
+        flash[:alert] = 'Can\'t complete payment'
+      end
       redirect_to admin_order_path(@payment.order)
     end
 
     def fail
-      Payments::StateService.new(@payment).fail!
+      if Payments::StateService.new(@payment).fail!
+        flash[:notice] = 'Payment failed'
+      else
+        flash[:alert] = 'Can\'t fail payment'
+      end
       redirect_to admin_order_path(@payment.order)
     end
 

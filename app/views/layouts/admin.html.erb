@@ -9,11 +9,11 @@
   </head>
   <body>
     <%= render 'admin/navigation' %>
-    <%= render 'flash_messages' %>
       <div class="container-fluid d-flex flex-column">
         <div class="row" style="height:100vh">
             <%= render 'admin/sidebar' %>
             <div class="col-md-10 pt-3 px-4">
+                <%= render 'flash_messages' %>
               <%= yield %>
             </div>
         </div>

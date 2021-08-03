@@ -7,8 +7,3 @@
     <%= render partial: "order_items", locals: {order: @order, order_items: @order.order_items.includes(:product)} %>
   </div>
 </div>
-
-<% if @order.payment.pending? %>
- <%= link_to "Complete", admin_complete_payment_path, method: :patch, class: "btn btn-success" %>
- <%= link_to "Fail", admin_fail_payment_path, method: :patch, class: "btn btn-success" %>
-<% end %>
