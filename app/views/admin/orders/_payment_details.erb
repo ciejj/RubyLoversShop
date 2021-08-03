@@ -10,7 +10,7 @@
     <div>
       <h6>State:</h6>
     </div>
-    <span class="text-muted"><%= payment.state %></span>
+    <%= payment.state_badge %>
   </li>
   <li class="list-group-item d-flex justify-content-between lh-condensed payment-update">
     <div>
@@ -18,22 +18,14 @@
     </div>
     <span class="text-muted"><%= payment.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
   </li>
-  <% Payments::StateService.new(payment).possible_events.tap do |events| %>
-    <% if events.any? %>
-      <li class="list-group-item d-flex justify-content-between lh-condensed payment-events">
-        <% if events.include? :complete %>
-          <div>        
-            <%= link_to "Complete", admin_complete_payment_path(payment), 
-              method: :patch, class: "btn btn-outline-success btn-block complete-payment" %>
-          </div>
-        <% end %>
-        <% if events.include? :fail %>
-            <div>
-              <%= link_to "Fail", admin_fail_payment_path(payment), 
-                method: :patch, class: "btn btn-outline-danger btn-block fail-payment" %>
-            </div>
-        <% end %>
-      </li>
-    <% end %>
-  <% end %>
+  <li class="list-group-item d-flex justify-content-between lh-condensed payment-update payment-events">
+    <div>
+      <h6>Change state:</h6>
+    </div>
+    <div class="d-flex justify-content-between lh-condensed">
+        <% payment.events_buttons%>
+    </div>
+
+  </li>
+
 </div>
