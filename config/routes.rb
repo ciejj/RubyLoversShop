@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     root to: "products#index", :as => :administrator_root
     resources :products
     resources :orders, only: %i[index show]
+
+    patch 'payments/:id/complete', to: "payments#complete", as: :complete_payment
+    patch 'payments/:id/fail', to: "payments#fail", as: :fail_payment
   end
 
   resources :products, only: %i[show]
