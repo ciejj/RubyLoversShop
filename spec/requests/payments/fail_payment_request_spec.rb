@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require_relative '../shared/request_restricted_to_administrators'
+require_relative '../shared/patch_for_administrators_only'
 
 RSpec.describe 'PATCH admin/payments/:id/fail', type: :request do
   let!(:order) { create(:order) }
@@ -50,7 +50,7 @@ RSpec.describe 'PATCH admin/payments/:id/fail', type: :request do
     end
   end
 
-  it_behaves_like 'request restricted to administrators' do
-    let(:path) { "/admin/orders/#{order.id}" }
+  it_behaves_like 'patch for administrators only' do
+    let(:path) { "/admin/payments/#{payment.id}/fail" }
   end
 end
