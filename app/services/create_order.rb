@@ -10,6 +10,7 @@ class CreateOrder
       cart = yield validate_cart(cart)
       order = yield create_order(user)
       yield add_products_to_order(order, cart)
+      yield link_payment_to_order(order)
       yield clear_cart(cart)
 
       Success("Order has been placed with id: #{order.id}")
@@ -42,9 +43,19 @@ class CreateOrder
     end
 
     if cart.cart_items.count == order.order_items.count
-      Success('Products copied to order successfully')
+      Success(order)
     else
       Failure('Adding products to order has failed')
+    end
+  end
+
+  def link_payment_to_order(order)
+    payment = Payment.create(order: order)
+
+    if payment
+      Success(payment)
+    else
+      Failure('Linking payment to order has failed')
     end
   end
 
