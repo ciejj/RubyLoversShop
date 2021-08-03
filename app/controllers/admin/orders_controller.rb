@@ -7,7 +7,7 @@ module Admin
     end
 
     def show
-      @order = Order.find(params[:id])
+      @order = Order.find(params[:id]).decorate
     end
   end
 end
