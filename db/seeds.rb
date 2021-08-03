@@ -42,5 +42,6 @@ Order.destroy_all
 25.times do
   Order.create(state: rand(1..3), user: User.all.sample)
   Payment.create(order: Order.last)
+  Shipment.create(order: Order.last)
   rand(5).times {|x| OrderItem.create(order: Order.last, product: Product.all.sample)}
 end

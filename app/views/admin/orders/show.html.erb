@@ -1,9 +1,10 @@
 <div class="row">
   <div class="col-md-4">
-   <%= render partial: "order_details", locals: {order: @order} %>
-   <%= render partial: "payment_details", locals: {payment: @order.payment} %>
+   <%= render partial: "order_details", locals: { order: @order } %>
+   <%= render partial: "payment_details", locals: { payment: @order.payment } %>
+    <%= render partial: "shipment_details", locals: { shipment: @order.shipment } %>
      </div>
   <div class="col-md-4">
-    <%= render partial: "order_items", locals: {order: @order, order_items: @order.order_items.includes(:product)} %>
+    <%= render partial: "order_items", locals: { order: @order, order_items: @order.order_items.includes(:product) } %>
   </div>
 </div>
