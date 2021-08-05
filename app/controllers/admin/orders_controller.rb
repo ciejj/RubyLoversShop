@@ -7,8 +7,7 @@ module Admin
     end
 
     def show
-      @order = Order.find(params[:id])
-      @order_items = @order.order_items.includes(:product)
+      @order = Order.find(params[:id]).decorate
     end
   end
 end

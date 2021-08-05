@@ -8,6 +8,13 @@ Rails.application.routes.draw do
     root to: "products#index", :as => :administrator_root
     resources :products
     resources :orders, only: %i[index show]
+
+    resources :payments, only: [] do
+      member do
+        patch :complete
+        patch :fail
+      end
+    end
   end
 
   resources :products, only: %i[show]
