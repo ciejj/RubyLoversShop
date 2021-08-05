@@ -10,7 +10,7 @@
     <div>
       <h6>State:</h6>
     </div>
-    <%= shipment.state %>
+    <%= shipment.state_badge %>
   </li>
   <li class="list-group-item d-flex justify-content-between lh-condensed payment-update">
     <div>
@@ -23,7 +23,7 @@
       <h6>Change state:</h6>
     </div>
     <div class="d-flex justify-content-between lh-condensed">
-        TBC
+      <% shipment.events_buttons %>
     </div>
   </li>
 </div>

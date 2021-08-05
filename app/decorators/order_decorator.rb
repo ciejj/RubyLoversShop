@@ -3,6 +3,7 @@
 class OrderDecorator < Draper::Decorator
   delegate_all
   decorates_association :payment
+  decorates_association :shipment
 
   def state_badge
     case object.state

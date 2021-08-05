@@ -41,7 +41,7 @@ module Shipments
     end
 
     def possible_events
-      aasm.events(possible: true).map(&:name)
+      aasm.events(permitted: true).map(&:name)
     end
 
     private
