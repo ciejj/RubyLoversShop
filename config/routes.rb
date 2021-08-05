@@ -9,8 +9,12 @@ Rails.application.routes.draw do
     resources :products
     resources :orders, only: %i[index show]
 
-    patch 'payments/:id/complete', to: "payments#complete", as: :complete_payment
-    patch 'payments/:id/fail', to: "payments#fail", as: :fail_payment
+    resources :payments, only: [] do
+      member do
+        patch :complete
+        patch :fail
+      end
+    end
   end
 
   resources :products, only: %i[show]

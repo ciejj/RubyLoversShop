@@ -23,14 +23,14 @@ class PaymentDecorator < Draper::Decorator
 
   def complete_button(possible_events)
     if possible_events.include?(:complete)
-      h.link_to 'Complete', h.admin_complete_payment_path(object),
+      h.link_to 'Complete', h.complete_admin_payment_path(object),
                 method: :patch, class: 'btn btn-outline-success btn-sm complete-payment m-1'
     end
   end
 
   def fail_button(possible_events)
     if possible_events.include?(:fail)
-      h.link_to 'Fail', h.admin_fail_payment_path(object),
+      h.link_to 'Fail', h.fail_admin_payment_path(object),
                 method: :patch, class: 'btn btn-outline-danger btn-sm complete-payment m-1'
     end
   end
