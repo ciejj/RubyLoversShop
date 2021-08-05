@@ -7,9 +7,7 @@ class ShipmentDecorator < Draper::Decorator
     case object.state
     when 'pending'
       css_class = 'shipment-state badge badge-secondary'
-    when 'ready'
-      css_class = 'shipment-state badge badge-info'
-    when 'shipped'
+    when 'ready', 'shipped'
       css_class = 'shipment-state badge badge-success'
     when 'cancelled', 'failed'
       css_class = 'shipment-state badge badge-danger'
