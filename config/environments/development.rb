@@ -4,9 +4,9 @@ Rails.application.configure do
     Bullet.alert         = true
     Bullet.bullet_logger = true
     Bullet.console       = true
+    Bullet.add_whitelist :type => :unused_eager_loading, :class_name => "Order", :association => :shipment
+    Bullet.add_whitelist :type => :unused_eager_loading, :class_name => "Order", :association => :payment
   # Bullet.growl         = true
-    Bullet.rails_logger  = true
-    Bullet.add_footer    = true
   end
 
   # Settings specified here will take precedence over those in config/application.rb.

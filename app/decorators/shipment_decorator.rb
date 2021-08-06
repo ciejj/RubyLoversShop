@@ -9,7 +9,7 @@ class ShipmentDecorator < Draper::Decorator
       css_class = 'shipment-state badge badge-secondary'
     when 'ready', 'shipped'
       css_class = 'shipment-state badge badge-success'
-    when 'cancelled', 'failed'
+    when 'canceled', 'failed'
       css_class = 'shipment-state badge badge-danger'
     end
     h.tag.span(object.state, class: css_class)

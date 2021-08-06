@@ -7,6 +7,8 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">State</th>
+      <th scope="col">Payment</th>
+      <th scope="col">Shipment</th>
       <th scope="col">Created_at</th>
       <th scope="col"></th>
     </tr>
@@ -16,6 +18,8 @@
     <tr>
       <th scope="row" class="order-id"><%= order.id %></th>
       <td><%= order.state %></td>
+      <td><%= order.payment.state_badge %></td>
+      <td><%= order.shipment.state_badge %></td>
       <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
       <td><%= link_to "view", admin_order_path(order), 
           class: "btn btn-outline-secondary btn-sm" %></td>
