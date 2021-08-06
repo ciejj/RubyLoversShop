@@ -2,7 +2,7 @@
   <h2>Orders</h2>
 </div>
 
-<table class="table table-striped table-sm">
+<table class="table table-striped table-sm text-center">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Id</th>
@@ -17,7 +17,7 @@
     <% @orders.each do |order| %>
     <tr>
       <th scope="row" class="order-id"><%= order.id %></th>
-      <td><%= order.state %></td>
+      <td><%= order.state_badge %></td>
       <td><%= order.payment.state_badge %></td>
       <td><%= order.shipment.state_badge %></td>
       <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
