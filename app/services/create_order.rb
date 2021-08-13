@@ -11,6 +11,7 @@ class CreateOrder
       order = yield create_order(user)
       yield add_products_to_order(order, cart)
       yield link_payment_to_order(order)
+      yield link_shipment_to_order(order)
       yield clear_cart(cart)
 
       Success("Order has been placed with id: #{order.id}")
@@ -56,6 +57,16 @@ class CreateOrder
       Success(payment)
     else
       Failure('Linking payment to order has failed')
+    end
+  end
+
+  def link_shipment_to_order(order)
+    shipment = Shipment.create(order: order)
+
+    if shipment
+      Success(shipment)
+    else
+      Failure('Linking shipment to order has failed')
     end
   end
 

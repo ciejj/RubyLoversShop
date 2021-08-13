@@ -1,0 +1,29 @@
+<div class="shipment-details">
+<h4 class="mb-3 mt-3">Shipment details</h4>
+  <li class="list-group-item d-flex justify-content-between lh-condensed shipment-id">
+    <div>
+      <h6>Shipment id: </h6>
+    </div>
+    <span class="order-id text-muted"><%= shipment.id %></span>
+  </li>  
+  <li class="list-group-item d-flex justify-content-between lh-condensed shipment-state">
+    <div>
+      <h6>State:</h6>
+    </div>
+    <%= shipment.state_badge %>
+  </li>
+  <li class="list-group-item d-flex justify-content-between lh-condensed shipment-update">
+    <div>
+      <h6>Updated at:</h6>
+    </div>
+    <span class="text-muted"><%= shipment.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between lh-condensed shipment-events">
+    <div>
+      <h6>Change state:</h6>
+    </div>
+    <div class="d-flex justify-content-between lh-condensed">
+      <% shipment.events_buttons %>
+    </div>
+  </li>
+</div>

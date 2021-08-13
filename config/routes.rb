@@ -15,6 +15,15 @@ Rails.application.routes.draw do
         patch :fail
       end
     end
+
+    resources :shipments, only: [] do
+      member do
+        patch :prepare
+        patch :ship
+        patch :fail
+        patch :cancel
+      end
+    end
   end
 
   resources :products, only: %i[show]

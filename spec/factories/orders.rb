@@ -7,6 +7,7 @@ FactoryBot.define do
 
     after(:create) do |order|
       create(:payment, order: order)
+      create(:shipment, order: order)
       create(:order_item, order: order)
     end
   end
