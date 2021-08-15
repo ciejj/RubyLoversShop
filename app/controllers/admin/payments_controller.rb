@@ -2,7 +2,7 @@
 
 module Admin
   class PaymentsController < AdminController
-    before_action :set_payment, only: %i[complete fail update]
+    before_action :set_payment, only: %i[update]
 
     def update
       event = params[:event]
