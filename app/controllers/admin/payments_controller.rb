@@ -2,22 +2,15 @@
 
 module Admin
   class PaymentsController < AdminController
-    before_action :set_payment, only: %i[complete fail]
+    before_action :set_payment, only: %i[complete fail update]
 
-    def complete
-      if Payments::StateService.new(@payment).complete!
-        flash[:notice] = 'Payment completed'
-      else
-        flash[:alert] = 'Can\'t complete payment'
-      end
-      redirect_to admin_order_path(@payment.order)
-    end
+    def update
+      event = params[:event]
 
-    def fail
-      if Payments::StateService.new(@payment).fail!
-        flash[:notice] = 'Payment failed'
+      if Payments::StateService.new(@payment).send(event)
+        flash[:success] = "Payment #{event}ed."
       else
-        flash[:alert] = 'Can\'t fail payment'
+        flash[:alert] = "Can\'t  #{event} payment"
       end
       redirect_to admin_order_path(@payment.order)
     end

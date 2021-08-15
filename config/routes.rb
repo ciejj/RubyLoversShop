@@ -9,11 +9,7 @@ Rails.application.routes.draw do
     resources :products
     resources :orders, only: %i[index show]
 
-    resources :payments, only: [] do
-      member do
-        patch :complete
-        patch :fail
-      end
+    resources :payments, only: %i[update] do
     end
 
     resources :shipments, only: [] do

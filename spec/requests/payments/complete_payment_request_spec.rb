@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'PATCH admin/payments/:id/complete', type: :request do
+RSpec.describe 'PATCH admin/payments/:id?event=complete', type: :request do
   let!(:order) { create(:order) }
   let!(:payment) { order.payment }
 
@@ -13,10 +13,10 @@ RSpec.describe 'PATCH admin/payments/:id/complete', type: :request do
       login_as(administrator, scope: :administrator)
     end
 
-    context 'when the payment state is \'penging\'' do
+    context 'when the payment state is \'pending\'' do
       it 'sets the payment state to \'complete\'' do
         expect do
-          patch "/admin/payments/#{payment.id}/complete"
+          patch "/admin/payments/#{payment.id}?event=complete"
           payment.reload
         end.to change(payment, :state).from('pending').to('completed')
       end
@@ -29,7 +29,7 @@ RSpec.describe 'PATCH admin/payments/:id/complete', type: :request do
 
       it 'does not change the payment state' do
         expect do
-          patch "/admin/payments/#{payment.id}/complete"
+          patch "/admin/payments/#{payment.id}?event=complete"
           payment.reload
         end.not_to change(payment, :state)
       end
@@ -42,7 +42,7 @@ RSpec.describe 'PATCH admin/payments/:id/complete', type: :request do
 
       it 'does not change the payment state' do
         expect do
-          patch "/admin/payments/#{payment.id}/complete"
+          patch "/admin/payments/#{payment.id}?event=complete"
           payment.reload
         end.not_to change(payment, :state)
       end
