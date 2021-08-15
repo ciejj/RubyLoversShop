@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'PATCH admin/shipments/:id/prepare', type: :request do
+RSpec.describe 'PATCH admin/shipments/:id?event=prepare', type: :request do
   let!(:order) { create(:order) }
   let!(:shipment) { order.shipment }
 
@@ -16,7 +16,7 @@ RSpec.describe 'PATCH admin/shipments/:id/prepare', type: :request do
     context 'when the shipment state is \'penging\'' do
       it 'sets the shipment\'s state to \'ready\'' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/prepare"
+          patch "/admin/shipments/#{shipment.id}?event=prepare"
           shipment.reload
         end.to change(shipment, :state).from('pending').to('ready')
       end
@@ -29,7 +29,7 @@ RSpec.describe 'PATCH admin/shipments/:id/prepare', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/prepare"
+          patch "/admin/shipments/#{shipment.id}?event=prepare"
           shipment.reload
         end.not_to change(shipment, :state)
       end
@@ -42,7 +42,7 @@ RSpec.describe 'PATCH admin/shipments/:id/prepare', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/prepare"
+          patch "/admin/shipments/#{shipment.id}?event=prepare"
           shipment.reload
         end.not_to change(shipment, :state)
       end
@@ -55,7 +55,7 @@ RSpec.describe 'PATCH admin/shipments/:id/prepare', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/prepare"
+          patch "/admin/shipments/#{shipment.id}?event=prepare"
           shipment.reload
         end.not_to change(shipment, :state)
       end
@@ -68,7 +68,7 @@ RSpec.describe 'PATCH admin/shipments/:id/prepare', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/prepare"
+          patch "/admin/shipments/#{shipment.id}?event=prepare"
           shipment.reload
         end.not_to change(shipment, :state)
       end

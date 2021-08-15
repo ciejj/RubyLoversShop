@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'PATCH admin/shipments/:id/fail', type: :request do
+RSpec.describe 'PATCH admin/shipments/:id?event=fail', type: :request do
   let!(:order) { create(:order) }
   let!(:shipment) { order.shipment }
 
@@ -16,7 +16,7 @@ RSpec.describe 'PATCH admin/shipments/:id/fail', type: :request do
     context 'when the shipment state is \'pending\'' do
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/fail"
+          patch "/admin/shipments/#{shipment.id}?event=fail"
           shipment.reload
         end.not_to change(shipment, :state)
       end
@@ -29,7 +29,7 @@ RSpec.describe 'PATCH admin/shipments/:id/fail', type: :request do
 
       it 'sets the shipment\'s state to \'failed\'' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/fail"
+          patch "/admin/shipments/#{shipment.id}?event=fail"
           shipment.reload
         end.to change(shipment, :state).from('ready').to('failed')
       end
@@ -42,7 +42,7 @@ RSpec.describe 'PATCH admin/shipments/:id/fail', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/fail"
+          patch "/admin/shipments/#{shipment.id}?event=fail"
           shipment.reload
         end.not_to change(shipment, :state)
       end
@@ -55,7 +55,7 @@ RSpec.describe 'PATCH admin/shipments/:id/fail', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/fail"
+          patch "/admin/shipments/#{shipment.id}?event=fail"
           shipment.reload
         end.not_to change(shipment, :state)
       end
@@ -68,7 +68,7 @@ RSpec.describe 'PATCH admin/shipments/:id/fail', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/fail"
+          patch "/admin/shipments/#{shipment.id}?event=fail"
           shipment.reload
         end.not_to change(shipment, :state)
       end

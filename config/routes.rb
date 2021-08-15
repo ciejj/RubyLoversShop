@@ -12,13 +12,7 @@ Rails.application.routes.draw do
     resources :payments, only: %i[update] do
     end
 
-    resources :shipments, only: [] do
-      member do
-        patch :prepare
-        patch :ship
-        patch :fail
-        patch :cancel
-      end
+    resources :shipments, only: %i[update] do
     end
   end
 
