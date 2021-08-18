@@ -29,8 +29,8 @@ module Orders
       after_all_transitions :update_order_state
     end
 
-    def possible_events
-      aasm.events(possible: true).map(&:name)
+    def permitted_events
+      aasm.events(permitted: true).map(&:name)
     end
 
     private
