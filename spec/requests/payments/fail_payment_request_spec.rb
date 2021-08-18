@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'PATCH admin/payments/:id/fail', type: :request do
+RSpec.describe 'PATCH admin/payments/:id?event=fail', type: :request do
   let!(:order) { create(:order) }
   let!(:payment) { order.payment }
 
@@ -16,7 +16,7 @@ RSpec.describe 'PATCH admin/payments/:id/fail', type: :request do
     context 'when the payment state is \'penging\'' do
       it 'sets the payment state to \'failed\'' do
         expect do
-          patch "/admin/payments/#{payment.id}/fail"
+          patch "/admin/payments/#{payment.id}?event=fail"
           payment.reload
         end.to change(payment, :state).from('pending').to('failed')
       end
@@ -29,7 +29,7 @@ RSpec.describe 'PATCH admin/payments/:id/fail', type: :request do
 
       it 'does not change the payment state' do
         expect do
-          patch "/admin/payments/#{payment.id}/fail"
+          patch "/admin/payments/#{payment.id}?event=fail"
           payment.reload
         end.not_to change(payment, :state)
       end
@@ -42,7 +42,7 @@ RSpec.describe 'PATCH admin/payments/:id/fail', type: :request do
 
       it 'does not change the payment state' do
         expect do
-          patch "/admin/payments/#{payment.id}/fail"
+          patch "/admin/payments/#{payment.id}?event=fail"
           payment.reload
         end.not_to change(payment, :state)
       end

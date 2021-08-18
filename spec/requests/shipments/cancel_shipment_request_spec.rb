@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'PATCH admin/shipments/:id/cancel', type: :request do
+RSpec.describe 'PATCH admin/shipments/:id?event=cancel', type: :request do
   let!(:order) { create(:order) }
   let!(:shipment) { order.shipment }
 
@@ -16,7 +16,7 @@ RSpec.describe 'PATCH admin/shipments/:id/cancel', type: :request do
     context 'when the shipment state is \'penging\'' do
       it 'sets the shipment\'s state to \'canceled\'' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/cancel"
+          patch "/admin/shipments/#{shipment.id}?event=cancel"
           shipment.reload
         end.to change(shipment, :state).from('pending').to('canceled')
       end
@@ -29,7 +29,7 @@ RSpec.describe 'PATCH admin/shipments/:id/cancel', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/cancel"
+          patch "/admin/shipments/#{shipment.id}?event=cancel"
           shipment.reload
         end.not_to change(shipment, :state)
       end
@@ -42,7 +42,7 @@ RSpec.describe 'PATCH admin/shipments/:id/cancel', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/cancel"
+          patch "/admin/shipments/#{shipment.id}?event=cancel"
           shipment.reload
         end.not_to change(shipment, :state)
       end
@@ -55,7 +55,7 @@ RSpec.describe 'PATCH admin/shipments/:id/cancel', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/cancel"
+          patch "/admin/shipments/#{shipment.id}?event=cancel"
           shipment.reload
         end.not_to change(shipment, :state)
       end
@@ -68,7 +68,7 @@ RSpec.describe 'PATCH admin/shipments/:id/cancel', type: :request do
 
       it 'does not change the shipment\'s state' do
         expect do
-          patch "/admin/shipments/#{shipment.id}/cancel"
+          patch "/admin/shipments/#{shipment.id}?event=cancel"
           shipment.reload
         end.not_to change(shipment, :state)
       end

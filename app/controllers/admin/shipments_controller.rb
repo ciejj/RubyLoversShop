@@ -2,40 +2,15 @@
 
 module Admin
   class ShipmentsController < AdminController
-    before_action :set_shipment, only: %i[prepare ship fail cancel]
+    before_action :set_shipment, only: %i[update]
 
-    def prepare
-      if Shipments::StateService.new(@shipment).prepare!
-        flash[:notice] = 'Shipment prepared'
-      else
-        flash[:alert] = 'Can\'t prepare the shipment'
-      end
-      redirect_to admin_order_path(@shipment.order)
-    end
+    def update
+      event = params[:event]
 
-    def ship
-      if Shipments::StateService.new(@shipment).ship!
-        flash[:notice] = 'Shipment shipped'
+      if Shipments::StateService.new(@shipment).send(event)
+        flash[:success] = 'Shipment status change has been succesfull'
       else
-        flash[:alert] = 'Can\'t ship the shipment'
-      end
-      redirect_to admin_order_path(@shipment.order)
-    end
-
-    def fail
-      if Shipments::StateService.new(@shipment).fail!
-        flash[:notice] = 'Shipment failed'
-      else
-        flash[:alert] = 'Can\'t fail the shipment'
-      end
-      redirect_to admin_order_path(@shipment.order)
-    end
-
-    def cancel
-      if Shipments::StateService.new(@shipment).cancel!
-        flash[:notice] = 'Shipment canceled'
-      else
-        flash[:alert] = 'Can\'t cancel the shipment'
+        flash[:alert] = 'Can\'t change shipment status'
       end
       redirect_to admin_order_path(@shipment.order)
     end

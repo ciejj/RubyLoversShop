@@ -16,21 +16,22 @@ class PaymentDecorator < Draper::Decorator
 
   def events_buttons
     possible_events = Payments::StateService.new(object).possible_events
-    h.concat complete_button(possible_events)
-    h.concat fail_button(possible_events)
+    %w[complete fail].each do |event|
+      h.concat method("#{event}_button").call(possible_events)
+    end
     h.concat not_available(possible_events)
   end
 
   def complete_button(possible_events)
     if possible_events.include?(:complete)
-      h.link_to 'Complete', h.complete_admin_payment_path(object),
+      h.link_to 'Complete', h.admin_payment_path(id: object.id, event: 'complete'),
                 method: :patch, class: 'btn btn-outline-success btn-sm complete-payment m-1'
     end
   end
 
   def fail_button(possible_events)
     if possible_events.include?(:fail)
-      h.link_to 'Fail', h.fail_admin_payment_path(object),
+      h.link_to 'Fail', h.admin_payment_path(id: object.id, event: 'fail'),
                 method: :patch, class: 'btn btn-outline-danger btn-sm complete-payment m-1'
     end
   end
