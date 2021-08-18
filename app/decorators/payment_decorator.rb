@@ -29,7 +29,7 @@ class PaymentDecorator < Draper::Decorator
 
   def fail_button
     h.link_to 'Fail', h.admin_payment_path(id: object.id, event: 'fail'),
-              method: :patch, class: 'btn btn-outline-danger btn-sm complete-payment m-1'
+              method: :patch, class: 'btn btn-outline-danger btn-sm fail-payment m-1'
   end
 
   def not_available

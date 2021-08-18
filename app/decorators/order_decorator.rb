@@ -26,12 +26,12 @@ class OrderDecorator < Draper::Decorator
 
   def complete_button
     h.link_to 'Complete', h.admin_order_path(id: object.id, event: 'complete'),
-              method: :patch, class: 'btn btn-outline-success btn-sm complete-payment m-1'
+              method: :patch, class: 'btn btn-outline-success btn-sm complete-order m-1'
   end
 
   def fail_button
     h.link_to 'Fail', h.admin_order_path(id: object.id, event: 'fail'),
-              method: :patch, class: 'btn btn-outline-danger btn-sm complete-payment m-1'
+              method: :patch, class: 'btn btn-outline-danger btn-sm fail-order m-1'
   end
 
   def not_available

@@ -20,7 +20,7 @@ class ShipmentDecorator < Draper::Decorator
     %w[prepare ship cancel fail].each do |event|
       h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
     end
-    h.concat not_available(permitted_events) if permitted_events.empty?
+    h.concat not_available if permitted_events.empty?
   end
 
   def prepare_button
