@@ -40,7 +40,7 @@ module Shipments
       after_all_transitions :update_shipment_state
     end
 
-    def possible_events
+    def permitted_events
       aasm.events(permitted: true).map(&:name)
     end
 

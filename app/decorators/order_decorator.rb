@@ -19,26 +19,22 @@ class OrderDecorator < Draper::Decorator
   def events_buttons
     permitted_events = Orders::StateService.new(object).permitted_events
     %w[complete fail].each do |event|
-      h.concat method("#{event}_button").call(permitted_events)
+      h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
     end
-    h.concat not_available(permitted_events)
+    h.concat not_available if permitted_events.empty?
   end
 
-  def complete_button(permitted_events)
-    if permitted_events.include?(:complete)
-      h.link_to 'Complete', h.admin_order_path(id: object.id, event: 'complete'),
-                method: :patch, class: 'btn btn-outline-success btn-sm complete-payment m-1'
-    end
+  def complete_button
+    h.link_to 'Complete', h.admin_order_path(id: object.id, event: 'complete'),
+              method: :patch, class: 'btn btn-outline-success btn-sm complete-payment m-1'
   end
 
-  def fail_button(permitted_events)
-    if permitted_events.include?(:fail)
-      h.link_to 'Fail', h.admin_order_path(id: object.id, event: 'fail'),
-                method: :patch, class: 'btn btn-outline-danger btn-sm complete-payment m-1'
-    end
+  def fail_button
+    h.link_to 'Fail', h.admin_order_path(id: object.id, event: 'fail'),
+              method: :patch, class: 'btn btn-outline-danger btn-sm complete-payment m-1'
   end
 
-  def not_available(permitted_events)
-    h.tag.span('not available', class: 'text-muted') if permitted_events.empty?
+  def not_available
+    h.tag.span('not available', class: 'text-muted')
   end
 end

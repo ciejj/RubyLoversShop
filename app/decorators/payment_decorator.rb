@@ -15,28 +15,24 @@ class PaymentDecorator < Draper::Decorator
   end
 
   def events_buttons
-    possible_events = Payments::StateService.new(object).possible_events
+    permitted_events = Payments::StateService.new(object).permitted_events
     %w[complete fail].each do |event|
-      h.concat method("#{event}_button").call(possible_events)
+      h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
     end
-    h.concat not_available(possible_events)
+    h.concat not_available if permitted_events.empty?
   end
 
-  def complete_button(possible_events)
-    if possible_events.include?(:complete)
-      h.link_to 'Complete', h.admin_payment_path(id: object.id, event: 'complete'),
-                method: :patch, class: 'btn btn-outline-success btn-sm complete-payment m-1'
-    end
+  def complete_button
+    h.link_to 'Complete', h.admin_payment_path(id: object.id, event: 'complete'),
+              method: :patch, class: 'btn btn-outline-success btn-sm complete-payment m-1'
   end
 
-  def fail_button(possible_events)
-    if possible_events.include?(:fail)
-      h.link_to 'Fail', h.admin_payment_path(id: object.id, event: 'fail'),
-                method: :patch, class: 'btn btn-outline-danger btn-sm complete-payment m-1'
-    end
+  def fail_button
+    h.link_to 'Fail', h.admin_payment_path(id: object.id, event: 'fail'),
+              method: :patch, class: 'btn btn-outline-danger btn-sm complete-payment m-1'
   end
 
-  def not_available(possible_events)
-    h.tag.span('not available', class: 'text-muted') if possible_events.empty?
+  def not_available
+    h.tag.span('not available', class: 'text-muted')
   end
 end
