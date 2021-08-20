@@ -2,7 +2,6 @@
 
 module Admin
   class PaymentsController < AdminController
-
     def update
       payment = Payment.find(params[:id])
       event = params[:event]

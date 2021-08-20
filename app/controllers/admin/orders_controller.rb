@@ -2,7 +2,6 @@
 
 module Admin
   class OrdersController < AdminController
-
     def index
       @pagy, @orders = pagy(Order.includes(%i[shipment payment]).order(created_at: :desc).decorate)
     end

@@ -2,7 +2,6 @@
 
 module Admin
   class ShipmentsController < AdminController
-
     def update
       shipment = Shipment.find(params[:id])
       event = params[:event]
