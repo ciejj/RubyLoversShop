@@ -17,10 +17,13 @@ class ShipmentDecorator < Draper::Decorator
 
   def events_buttons
     permitted_events = Shipments::StateService.new(object).permitted_events
-    %w[prepare ship cancel fail].each do |event|
-      h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
+    if permitted_events.empty?
+      h.concat not_available
+    else
+      %w[prepare ship cancel fail].each do |event|
+        h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
+      end
     end
-    h.concat not_available if permitted_events.empty?
   end
 
   def prepare_button
