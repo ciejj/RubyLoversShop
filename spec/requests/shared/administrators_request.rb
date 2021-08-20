@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'request for administrators only' do
+RSpec.shared_examples 'administrators request' do
   context 'when logged in as User' do
     let!(:user) { create(:user) }
 
     before do
       login_as(user, scope: :user)
-      get path
+      method(request_method).call(path, params: params)
     end
 
     it 'redirects to root path' do
@@ -21,7 +21,7 @@ RSpec.shared_examples 'request for administrators only' do
 
   context 'when not logged in' do
     before do
-      get path
+      method(request_method).call(path, params: params)
     end
 
     it 'redirects to root path' do
