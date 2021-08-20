@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 require_relative '../shared/request_failing_order'
+require_relative '../shared/administrators_request'
 
 RSpec.describe 'PATCH admin/orders/:id?event=fail', type: :request do
   let!(:order) { create(:order) }
@@ -32,5 +33,11 @@ RSpec.describe 'PATCH admin/orders/:id?event=fail', type: :request do
         end.to change(order, :state).from('new').to('failed')
       end
     end
+  end
+
+  it_behaves_like 'administrators request' do
+    let(:request_method) { 'patch' }
+    let(:path) { "/admin/orders/#{order.id}?event=fail" }
+    let(:params) { {} }
   end
 end

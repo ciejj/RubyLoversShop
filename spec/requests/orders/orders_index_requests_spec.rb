@@ -24,8 +24,8 @@ RSpec.describe 'GET /admin/orders', type: :request do
   end
 
   it_behaves_like 'administrators request' do
-    let(:path) { '/admin/orders' }
     let(:request_method) { 'get' }
+    let(:path) { '/admin/orders' }
     let(:params) { {} }
   end
 end

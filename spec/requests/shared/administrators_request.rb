@@ -6,7 +6,7 @@ RSpec.shared_examples 'administrators request' do
 
     before do
       login_as(user, scope: :user)
-      method(request_method).call(path, params: params)
+      method(request_method).call(path)
     end
 
     it 'redirects to root path' do
@@ -21,7 +21,7 @@ RSpec.shared_examples 'administrators request' do
 
   context 'when not logged in' do
     before do
-      method(request_method).call(path, params: params)
+      method(request_method).call(path)
     end
 
     it 'redirects to root path' do

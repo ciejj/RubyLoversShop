@@ -74,4 +74,9 @@ RSpec.describe 'PATCH admin/shipments/:id?event=prepare', type: :request do
       end
     end
   end
+
+  it_behaves_like 'administrators request' do
+    let(:request_method) { 'patch' }
+    let(:path) { "/admin/shipments/#{shipment.id}?event=prepare" }
+  end
 end
