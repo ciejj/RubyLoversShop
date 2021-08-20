@@ -15,7 +15,6 @@ class PaymentDecorator < Draper::Decorator
   end
 
   def events_buttons
-    permitted_events = Payments::StateService.new(object).permitted_events
     if permitted_events.empty?
       h.concat not_available
     else
@@ -23,6 +22,10 @@ class PaymentDecorator < Draper::Decorator
         h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
       end
     end
+  end
+
+  def permitted_events
+    @permitted_events ||= Payments::StateService.new(object).permitted_events
   end
 
   def complete_button

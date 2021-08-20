@@ -16,7 +16,6 @@ class ShipmentDecorator < Draper::Decorator
   end
 
   def events_buttons
-    permitted_events = Shipments::StateService.new(object).permitted_events
     if permitted_events.empty?
       h.concat not_available
     else
@@ -24,6 +23,10 @@ class ShipmentDecorator < Draper::Decorator
         h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
       end
     end
+  end
+
+  def permitted_events
+    @permitted_events = Shipments::StateService.new(object).permitted_events
   end
 
   def prepare_button
