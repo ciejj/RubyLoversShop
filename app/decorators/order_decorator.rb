@@ -18,10 +18,13 @@ class OrderDecorator < Draper::Decorator
 
   def events_buttons
     permitted_events = Orders::StateService.new(object).permitted_events
-    %w[complete fail].each do |event|
-      h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
+    if permitted_events.empty?
+      h.concat not_available if permitted_events.empty?
+    else
+      %w[complete fail].each do |event|
+        h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
+      end
     end
-    h.concat not_available if permitted_events.empty?
   end
 
   def complete_button
