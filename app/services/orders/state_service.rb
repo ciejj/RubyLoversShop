@@ -7,11 +7,7 @@ module Orders
 
     def initialize(order)
       @order = order
-      if order.state.nil?
-        update_order_state
-      else
-        aasm.current_state = order.state.to_sym
-      end
+      aasm.current_state = order.state.to_sym
     end
 
     aasm whiny_transitions: false do

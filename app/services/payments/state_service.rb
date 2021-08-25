@@ -7,11 +7,7 @@ module Payments
 
     def initialize(payment)
       @payment = payment
-      if payment.state.nil?
-        update_payment_state
-      else
-        aasm.current_state = payment.state.to_sym
-      end
+      aasm.current_state = payment.state.to_sym
     end
 
     aasm whiny_transitions: false do
