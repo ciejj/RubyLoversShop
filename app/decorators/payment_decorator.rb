@@ -6,12 +6,13 @@ class PaymentDecorator < Draper::Decorator
   def state_badge
     case object.state
     when 'pending'
-      h.tag.span('pending', class: 'payment-state badge badge-secondary')
+      badge_class = 'payment-state badge badge-secondary'
     when 'completed'
-      h.tag.span('completed', class: 'payment-state badge badge-success')
+      badge_class = 'payment-state badge badge-success'
     when 'failed'
-      h.tag.span('failed', class: 'payment-state badge badge-danger')
+      badge_class = 'payment-state badge badge-danger'
     end
+    h.tag.span(object.state, class: badge_class)
   end
 
   def events_buttons

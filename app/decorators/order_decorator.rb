@@ -8,17 +8,18 @@ class OrderDecorator < Draper::Decorator
   def state_badge
     case object.state
     when 'new'
-      helpers.tag.span('new', class: 'order-state badge badge-secondary')
+      badge_class = 'order-state badge badge-secondary'
     when 'completed'
-      helpers.tag.span('completed', class: 'order-state badge badge-success')
+      badge_class = 'order-state badge badge-success'
     when 'failed'
-      helpers.tag.span('failed', class: 'order-state badge badge-danger')
+      badge_class = 'order-state badge badge-danger'
     end
+    h.tag.span(object.state, class: badge_class)
   end
 
   def events_buttons
     if permitted_events.empty?
-      h.concat not_available if permitted_events.empty?
+      h.concat not_available
     else
       %w[complete fail].each do |event|
         h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)

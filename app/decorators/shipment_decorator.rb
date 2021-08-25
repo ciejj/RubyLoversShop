@@ -6,13 +6,13 @@ class ShipmentDecorator < Draper::Decorator
   def state_badge
     case object.state
     when 'pending'
-      css_class = 'shipment-state badge badge-secondary'
+      badge_class = 'shipment-state badge badge-secondary'
     when 'ready', 'shipped'
-      css_class = 'shipment-state badge badge-success'
+      badge_class = 'shipment-state badge badge-success'
     when 'canceled', 'failed'
-      css_class = 'shipment-state badge badge-danger'
+      badge_class = 'shipment-state badge badge-danger'
     end
-    h.tag.span(object.state, class: css_class)
+    h.tag.span(object.state, class: badge_class)
   end
 
   def events_buttons
