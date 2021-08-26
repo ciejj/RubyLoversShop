@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require_relative '../shared/administrators_request'
 
 RSpec.describe 'PATCH admin/payments/:id?event=complete', type: :request do
   let!(:order) { create(:order) }
@@ -47,5 +48,10 @@ RSpec.describe 'PATCH admin/payments/:id?event=complete', type: :request do
         end.not_to change(payment, :state)
       end
     end
+  end
+
+  it_behaves_like 'administrators request' do
+    let(:request_method) { 'patch' }
+    let(:path) { "/admin/payments/#{payment.id}?event=complete" }
   end
 end

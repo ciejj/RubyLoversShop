@@ -48,4 +48,9 @@ RSpec.describe 'PATCH admin/payments/:id?event=fail', type: :request do
       end
     end
   end
+
+  it_behaves_like 'administrators request' do
+    let(:request_method) { 'patch' }
+    let(:path) { "/admin/payments/#{payment.id}?event=fail" }
+  end
 end

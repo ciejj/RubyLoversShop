@@ -7,11 +7,7 @@ module Shipments
 
     def initialize(shipment)
       @shipment = shipment
-      if shipment.state.nil?
-        update_shipment_state
-      else
-        aasm.current_state = shipment.state.to_sym
-      end
+      aasm.current_state = shipment.state.to_sym
     end
 
     aasm whiny_transitions: false do
@@ -40,7 +36,7 @@ module Shipments
       after_all_transitions :update_shipment_state
     end
 
-    def possible_events
+    def permitted_events
       aasm.events(permitted: true).map(&:name)
     end
 

@@ -6,37 +6,40 @@ class PaymentDecorator < Draper::Decorator
   def state_badge
     case object.state
     when 'pending'
-      h.tag.span('pending', class: 'payment-state badge badge-secondary')
+      badge_class = 'payment-state badge badge-secondary'
     when 'completed'
-      h.tag.span('completed', class: 'payment-state badge badge-success')
+      badge_class = 'payment-state badge badge-success'
     when 'failed'
-      h.tag.span('failed', class: 'payment-state badge badge-danger')
+      badge_class = 'payment-state badge badge-danger'
     end
+    h.tag.span(object.state, class: badge_class)
   end
 
   def events_buttons
-    possible_events = Payments::StateService.new(object).possible_events
-    %w[complete fail].each do |event|
-      h.concat method("#{event}_button").call(possible_events)
-    end
-    h.concat not_available(possible_events)
-  end
-
-  def complete_button(possible_events)
-    if possible_events.include?(:complete)
-      h.link_to 'Complete', h.admin_payment_path(id: object.id, event: 'complete'),
-                method: :patch, class: 'btn btn-outline-success btn-sm complete-payment m-1'
+    if permitted_events.empty?
+      h.concat not_available
+    else
+      %w[complete fail].each do |event|
+        h.concat method("#{event}_button").call if permitted_events.include?(event.to_sym)
+      end
     end
   end
 
-  def fail_button(possible_events)
-    if possible_events.include?(:fail)
-      h.link_to 'Fail', h.admin_payment_path(id: object.id, event: 'fail'),
-                method: :patch, class: 'btn btn-outline-danger btn-sm complete-payment m-1'
-    end
+  def permitted_events
+    @permitted_events ||= Payments::StateService.new(object).permitted_events
   end
 
-  def not_available(possible_events)
-    h.tag.span('not available', class: 'text-muted') if possible_events.empty?
+  def complete_button
+    h.link_to 'Complete', h.admin_payment_path(id: object.id, event: 'complete'),
+              method: :patch, class: 'btn btn-outline-success btn-sm complete-payment m-1'
+  end
+
+  def fail_button
+    h.link_to 'Fail', h.admin_payment_path(id: object.id, event: 'fail'),
+              method: :patch, class: 'btn btn-outline-danger btn-sm fail-payment m-1'
+  end
+
+  def not_available
+    h.tag.span('not available', class: 'text-muted')
   end
 end

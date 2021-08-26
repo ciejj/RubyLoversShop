@@ -7,11 +7,7 @@ module Payments
 
     def initialize(payment)
       @payment = payment
-      if payment.state.nil?
-        update_payment_state
-      else
-        aasm.current_state = payment.state.to_sym
-      end
+      aasm.current_state = payment.state.to_sym
     end
 
     aasm whiny_transitions: false do
@@ -29,8 +25,8 @@ module Payments
       after_all_transitions :update_payment_state
     end
 
-    def possible_events
-      aasm.events(possible: true).map(&:name)
+    def permitted_events
+      aasm.events(permitted: true).map(&:name)
     end
 
     private
