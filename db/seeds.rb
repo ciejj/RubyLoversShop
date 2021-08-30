@@ -29,6 +29,7 @@ Product.destroy_all
   p = Product.create(
       name: Faker::Commerce.unique.product_name,
       price: Faker::Number.decimal(l_digits: 2),
+      description: Faker::Lorem.sentence(word_count: 10, random_words_to_add: 40),
       category: Category.all.sample,
       brand: Brand.all.sample
   )
