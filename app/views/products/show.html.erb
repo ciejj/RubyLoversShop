@@ -1,15 +1,17 @@
-
-
 <div class="col-lg-6 offset-lg-3">
   <div class="card h-100">
     <a href="#"><%= image_tag( @product.main_image_path, class: 'card-img-top') %></a>
     <div class="card-body">
-      <h4 class="card-title">
+      <h4 class="card-title product-name text-center">
         <%= @product.name %>
       </h4>
-      <p>Brand: <%= @product.brand&.name %></p>
-      <h5><%= @product.price %> USD</h5>
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+      <h5 class="product-price">
+        <%= @product.price %> USD
+      </h5>
+      <%= @product.brand_info %>
+      <div class="card-text product-description">
+       <%= @product.description %>
+      </div>
     </div>
     <% if user_signed_in? %>
     <div class="card-footer">
