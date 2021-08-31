@@ -8,10 +8,12 @@
       <h5 class="product-price">
         <%= @product.price %> USD
       </h5>
-      <%= @product.brand_info %>
-      <div class="card-text product-description">
+      <p class="card-text product-brand">
+        <%= @product.brand_info %>
+      </p>
+      <p class="card-text product-description">
        <%= @product.description %>
-      </div>
+      </p>
     </div>
     <% if user_signed_in? %>
     <div class="card-footer">

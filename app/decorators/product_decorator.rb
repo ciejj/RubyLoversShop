@@ -6,7 +6,7 @@ class ProductDecorator < Draper::Decorator
   decorates_association :shipment
 
   def brand_info
-    object.brand.present? ? object.brand.name : '-'
-    h.tag.p("Brand: #{object.brand.name}", class: 'product-brand')
+    brand_name = object.brand.present? ? object.brand.name : '-'
+    "Brand: #{brand_name}"
   end
 end
