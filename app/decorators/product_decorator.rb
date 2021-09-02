@@ -2,11 +2,9 @@
 
 class ProductDecorator < Draper::Decorator
   delegate_all
-  decorates_association :payment
-  decorates_association :shipment
+  decorates_association :brand
 
-  def brand_info
-    brand_name = object.brand.present? ? object.brand.name : '-'
-    "Brand: #{brand_name}"
+  def main_image_path
+    object.main_image.attached? ? object.main_image : 'main_image_placeholder.png'
   end
 end
