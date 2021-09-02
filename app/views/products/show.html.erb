@@ -1,6 +1,6 @@
 <div class="col-lg-6 offset-lg-3">
   <div class="card h-100">
-    <a href="#"><%= image_tag( @product.main_image_path, class: 'card-img-top') %></a>
+    <%= image_tag( @product.main_image_path, class: 'card-img-top product-img') %>
     <div class="card-body">
       <h4 class="card-title product-name text-center">
         <%= @product.name %>
@@ -8,9 +8,6 @@
       <h5 class="product-price">
         <%= @product.price %> USD
       </h5>
-      <p class="card-text product-brand">
-        <%= @product.brand.brand_name %>
-      </p>
       <p class="card-text product-description">
        <%= @product.description %>
       </p>
