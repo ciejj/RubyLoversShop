@@ -14,12 +14,9 @@
       <p class="card-text product-description">
        <%= @product.description %>
       </p>
+      <div class="add-to-cart">
+        <%= product.add_to_cart_button%>
+      </div>
     </div>
-    <% if user_signed_in? %>
-    <div class="card-footer">
-      <%= button_to 'Add to Cart', add_to_cart_path(product_id: @product.id), 
-          class: "btn btn-small btn-block btn-outline-secondary" %>
-    </div>
-    <% end %>
   </div>
 </div>

@@ -10,5 +10,4 @@ class Product < ApplicationRecord
   scope :filter_by_brand, ->(brand_id) { where brand_id: brand_id }
   has_many :cart_items, dependent: :destroy
   has_many :order_items, dependent: :destroy
-
 end

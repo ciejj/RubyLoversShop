@@ -7,11 +7,8 @@
       </h4>
       <%= product.price %> USD</h5>
     </div>
-    <% if user_signed_in? %>
-      <div class="card-footer">
-        <%= button_to 'Add to Cart', add_to_cart_path(product_id: product.id), 
-            class: "btn btn-small btn-block btn-outline-secondary" %>
-      </div>
-    <% end %>
+    <div class="add-to-cart">
+      <%= product.add_to_cart_button%>
+    </div>
   </div>
 </div>
