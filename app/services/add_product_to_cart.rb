@@ -7,13 +7,16 @@ class AddProductToCart
 
   def call(cart:, product_id:)
     product = yield find_product(product_id)
+    cart_item = cart.cart_items.find_by(product_id: product.id)
 
-    if cart.cart_items.find_by(product_id: product.id)
-      Failure("#{product.name} is already in the cart")
+    if cart_item
+      cart_item.quantity += 1
+      cart_item.save
     else
       CartItem.create(product: product, cart: cart)
-      Success("Added #{product.name} to the cart")
     end
+
+    Success("Added #{product.name} to the cart")
   end
 
   private

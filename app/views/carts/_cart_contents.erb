@@ -6,6 +6,8 @@
           <th></th>
           <th scope="col">Product</th>
           <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">SubTotal</th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +16,8 @@
           <td> <%= image_tag(cart_item.product.main_image_path, class: 'card-img-top', style: "width: 140px; height: 80px;") %> </td>
           <th scope="row" class="product-name"><%= cart_item.product.name %></th>
           <td><%= cart_item.product.price %></td>
+          <td><%= cart_item.quantity %></td>
+          <td><%= cart_item.product.price * cart_item.quantity %> USD </td>
         </tr>
         <% end %>
 
