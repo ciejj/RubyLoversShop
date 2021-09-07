@@ -2,7 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe 'POST /cart', type: :request do
+RSpec.describe 'CartItems', type: :request do
+
+  decsribe 'Post /CartItem'
+
   context 'when logged in as user' do
     let!(:product) { create(:product) }
     let!(:user) { create(:user) }

@@ -10,7 +10,7 @@ class ProductDecorator < Draper::Decorator
 
   def add_to_cart_button
     if h.user_signed_in?
-      h.button_to 'Add to Cart', h.add_to_cart_path(product_id: object.id),
+      h.button_to 'Add to Cart', h.cart_items_path(product_id: object.id),
                   class: 'btn btn-small btn-block btn-outline-secondary'
     end
   end

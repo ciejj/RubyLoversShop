@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    result = CreateOrder.new.call(cart: @cart, user: current_user)
+    result = CreateOrder.new.call(user: current_user)
 
     if result.success?
       flash[:notice] = result.value!

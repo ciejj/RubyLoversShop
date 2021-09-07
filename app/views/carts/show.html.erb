@@ -1,9 +1,0 @@
-<div class="d-flex justify-content-between  align-items-center mb-3">
-  <h2>Shopping Cart</h2>
-</div>
-<% if @cart.empty? %>
-YOUR CART IS EMPTY
-<% else %>
-  <%= render partial: "cart_contents", locals: {cart: @cart, cart_items: @cart_items.decorate} %>
-<% end %>
-
