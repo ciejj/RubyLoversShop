@@ -3,28 +3,27 @@
 require 'rails_helper'
 
 RSpec.describe 'DELETE /cart', type: :request do
+  describe 'DELETE /cart_items'
   context 'when logged in as user' do
-    let!(:product) { create(:product) }
     let!(:user) { create(:user) }
 
     before do
       login_as(user, scope: :user)
-      post '/cart', params: { product_id: product.id }
+      create(:cart_item, user: user)
+      create(:cart_item, user: user)
     end
 
-    it 'creates new CartItem' do
+    it 'removes Cart Items' do
       expect do
-        delete '/cart'
-      end.to change(CartItem, :count).by(-1)
+        delete '/cart_items'
+      end.to change(user.cart_items, :count).by(-2)
     end
   end
 
   context 'when not logged in' do
-    let!(:product) { create(:product) }
-
-    it 'does not create CartItem' do
+    it 'does not remove Cart Items' do
       expect do
-        post '/cart', params: { product_id: product.id }
+        delete '/cart_items'
       end.not_to change(CartItem, :count)
     end
   end
