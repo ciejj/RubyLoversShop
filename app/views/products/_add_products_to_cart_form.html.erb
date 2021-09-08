@@ -1,0 +1,17 @@
+<%= form_with url: cart_items_path(product_id: product.id), method: :post, local: true do |form| %>
+  <div class="form-row">
+    <div class="col-md-4 mb-2">
+      <div class="form-row">
+        <div class="col">
+          <%= form.label :quantity, "Quantity" %>  
+        </div>
+        <div class="col">
+          <%= form.number_field :quantity, min: 1, max: 100, class: "form-control", value: 1 %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <%= form.submit "Add to Cart", class: 'btn btn-small btn-block btn-outline-secondary mb-2' %>
+    </div>
+  </div>
+<% end %>

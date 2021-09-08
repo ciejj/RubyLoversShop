@@ -5,14 +5,15 @@ require 'dry/monads'
 class AddProductToCart
   include Dry::Monads[:result, :do]
 
-  def call(product_id:, user_id:)
-    product = yield find_product(product_id)
-    cart_item = CartItem.find_by(product_id: product_id, user_id: user_id)
+  def call(params:, user:)
+    product = yield find_product(params[:product_id])
+    quantity = yield get_quantity(params)
+    cart_item = CartItem.find_by(product_id: product.id, user_id: user.id)
 
     if cart_item
-      increase_quantity(cart_item)
+      increase_quantity(cart_item, quantity)
     else
-      create_cart_item(product_id, user_id)
+      create_cart_item(product.id, user.id, quantity)
     end
     Success("Added #{product.name} to the cart")
   end
@@ -29,8 +30,22 @@ class AddProductToCart
     end
   end
 
-  def increase_quantity(cart_item)
-    cart_item.quantity += 1
+  def get_quantity(params)
+    quantity = if params[:quantity]
+                 params[:quantity].to_i
+               else
+                 1
+               end
+
+    if quantity
+      Success(quantity)
+    else
+      Failure('Quantity can\'t be determined')
+    end
+  end
+
+  def increase_quantity(cart_item, quantity)
+    cart_item.quantity += quantity
     if cart_item.save
       Success(cart_item)
     else
@@ -38,8 +53,8 @@ class AddProductToCart
     end
   end
 
-  def create_cart_item(product_id, user_id)
-    cart_item = CartItem.create(product_id: product_id, user_id: user_id)
+  def create_cart_item(product_id, user_id, quantity)
+    cart_item = CartItem.create(product_id: product_id, user_id: user_id, quantity: quantity)
     if cart_item
       Success(cart_item)
     else

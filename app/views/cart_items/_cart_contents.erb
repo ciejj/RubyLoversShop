@@ -14,10 +14,10 @@
         <% cart_items.each do |cart_item| %>
         <tr>
           <td> <%= cart_item.image %> </td>
-          <th scope="row" class="product-name"><%= cart_item.product.name %></th>
-          <td><%= cart_item.product.price %></td>
-          <td><%= cart_item.quantity %></td>
-          <td><%= cart_item.subtotal %> USD </td>
+          <th scope="row" class="cart_item-name"><%= cart_item.product.name %></th>
+          <td class= "cart_item-price"><%= cart_item.product.price %></td>
+          <td class= "cart_item-quantity"><%= cart_item.quantity %></td>
+          <td class= "cart_item-subtotal"> <%= cart_item.subtotal %> USD </td>
         </tr>
         <% end %>
       </tbody>

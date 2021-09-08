@@ -8,7 +8,7 @@ class CartItemsController < ApplicationController
   end
 
   def create
-    result = AddProductToCart.new.call(product_id: params[:product_id], user_id: current_user.id)
+    result = AddProductToCart.new.call(params: params, user: current_user)
 
     if result.success?
       flash[:notice] = result.value!
