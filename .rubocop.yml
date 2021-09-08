@@ -30,3 +30,4 @@ Style/GuardClause:
   Enabled: false
 RSpec/NestedGroups:
   Max: 4
+  
