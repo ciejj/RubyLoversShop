@@ -27,7 +27,7 @@ RSpec.describe 'CartItems', type: :request do
         it 'increases the quantity of existing Cart Item by quantity' do
           expect do
             post '/cart_items', params: { product_id: product.id }
-          end.to change { cart_item.reload.quantity }.from(1).to(1+quantiy)
+          end.to change { cart_item.reload.quantity }.from(1).to(1 + quantiy)
         end
       end
     end
