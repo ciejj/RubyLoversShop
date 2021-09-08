@@ -14,4 +14,8 @@ class ProductDecorator < Draper::Decorator
                   class: 'btn btn-small btn-block btn-outline-secondary'
     end
   end
+
+  def add_to_cart_form
+    h.render partial: 'products/add_to_cart_form', locals: { product: object } if h.user_signed_in?
+  end
 end
