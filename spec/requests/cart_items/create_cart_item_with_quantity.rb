@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'CartItems', type: :request do
-  describe 'POST /cart_items' do
+  describe 'POST /cart_items?quantity=' do
     context 'when logged in as user' do
       let!(:product) { create(:product) }
       let!(:user) { create(:user) }
@@ -15,18 +15,19 @@ RSpec.describe 'CartItems', type: :request do
       context 'when Cart Item does not exist' do
         it 'creates new CartItem' do
           expect do
-            post '/cart_items', params: { product_id: product.id }
+            post '/cart_items', params: { product_id: product.id, quantity: 2 }
           end.to change(CartItem, :count).by(1)
         end
       end
 
       context 'when Cart Item already exist' do
-        let!(:cart_item) { create(:cart_item, product: product, user: user, quantity: 1) }
+        let(:quantiy) { 2 }
+        let!(:cart_item) { create(:cart_item, product: product, user: user, quantity: quantity) }
 
-        it 'increases the quantity of existing Cart Item' do
+        it 'increases the quantity of existing Cart Item by quantity' do
           expect do
             post '/cart_items', params: { product_id: product.id }
-          end.to change { cart_item.reload.quantity }.from(1).to(2)
+          end.to change { cart_item.reload.quantity }.from(1).to(1+quantiy)
         end
       end
     end
