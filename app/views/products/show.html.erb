@@ -1,21 +1,19 @@
-
-
 <div class="col-lg-6 offset-lg-3">
   <div class="card h-100">
-    <a href="#"><%= image_tag( @product.main_image_path, class: 'card-img-top') %></a>
+    <%= image_tag( @product.main_image_path, class: 'card-img-top product-img') %>
     <div class="card-body">
-      <h4 class="card-title">
+      <h4 class="card-title product-name text-center">
         <%= @product.name %>
       </h4>
-      <p>Brand: <%= @product.brand&.name %></p>
-      <h5><%= @product.price %> USD</h5>
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+      <h5 class="product-price">
+        <%= @product.price %> USD
+      </h5>
+      <p class="card-text product-description">
+       <%= @product.description %>
+      </p>
+      <div class="add-to-cart">
+        <%= @product.add_to_cart_button%>
+      </div>
     </div>
-    <% if user_signed_in? %>
-    <div class="card-footer">
-      <%= button_to 'Add to Cart', add_to_cart_path(product_id: @product.id), 
-          class: "btn btn-small btn-block btn-outline-secondary" %>
-    </div>
-    <% end %>
   </div>
 </div>

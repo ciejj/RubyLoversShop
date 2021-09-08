@@ -10,8 +10,4 @@ class Product < ApplicationRecord
   scope :filter_by_brand, ->(brand_id) { where brand_id: brand_id }
   has_many :cart_items, dependent: :destroy
   has_many :order_items, dependent: :destroy
-
-  def main_image_path
-    main_image.attached? ? main_image : 'main_image_placeholder.png'
-  end
 end
