@@ -2,8 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe 'CartItems', type: :request do
+RSpec.describe '/cart_items', type: :request do
   describe 'DELETE /cart_items' do
+    subject(:request_call) { delete '/cart_items' }
+
     context 'when logged in as user' do
       let!(:user) { create(:user) }
 
@@ -15,7 +17,7 @@ RSpec.describe 'CartItems', type: :request do
 
       it 'removes Cart Items' do
         expect do
-          delete '/cart_items'
+          request_call
         end.to change(user.cart_items, :count).by(-2)
       end
     end
@@ -23,7 +25,7 @@ RSpec.describe 'CartItems', type: :request do
     context 'when not logged in' do
       it 'does not remove Cart Items' do
         expect do
-          delete '/cart_items'
+          request_call
         end.not_to change(CartItem, :count)
       end
     end

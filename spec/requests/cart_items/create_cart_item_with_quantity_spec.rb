@@ -4,14 +4,15 @@ require 'rails_helper'
 
 RSpec.describe '/cart_items', type: :request do
   describe 'POST /cart_items?quantity=' do
-    context 'when logged in as user' do
-      subject(:request_call) do
-        post '/cart_items', params: { product_id: product.id, quantity: quantity }
-      end
+    subject(:request_call) do
+      post '/cart_items', params: { product_id: product.id, quantity: quantity }
+    end
 
-      let!(:product) { create(:product) }
+    let!(:product) { create(:product) }
+    let(:quantity) { 2 }
+
+    context 'when logged in as user' do
       let!(:user) { create(:user) }
-      let(:quantity) { 2 }
 
       before do
         login_as(user, scope: :user)
@@ -37,11 +38,9 @@ RSpec.describe '/cart_items', type: :request do
     end
 
     context 'when not logged in' do
-      let!(:product) { create(:product) }
-
       it 'does not create CartItem' do
         expect do
-          post '/cart_items', params: { product_id: product.id }
+          request_call
         end.not_to change(CartItem, :count)
       end
     end
