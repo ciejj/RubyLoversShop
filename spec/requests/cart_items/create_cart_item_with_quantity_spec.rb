@@ -21,7 +21,7 @@ RSpec.describe 'CartItems', type: :request do
       end
 
       context 'when Cart Item already exist' do
-        let(:quantiy) { 2 }
+        let(:quantity) { 2 }
         let!(:cart_item) { create(:cart_item, product: product, user: user, quantity: quantity) }
 
         it 'increases the quantity of existing Cart Item by quantity' do
