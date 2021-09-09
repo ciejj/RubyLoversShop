@@ -14,4 +14,8 @@ class CartItemDecorator < Draper::Decorator
   def product
     @product || object.product.decorate
   end
+
+  def quantity_form
+    h.render partial: 'cart_items/quantity_form', locals: { cart_item: object }
+  end
 end
