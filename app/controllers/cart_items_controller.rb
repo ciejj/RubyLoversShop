@@ -19,6 +19,14 @@ class CartItemsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def update
+    result = CartItems::UpdateQuantity.new.call(params: params)
+
+    flash[:alert] = result.failure unless result.success?
+
+    redirect_back(fallback_location: cart_path)
+  end
+
   def destroy_all
     CartItem.where(user_id: current_user.id).destroy_all
     flash[:notice] = 'Cart has been emptied'
