@@ -6,26 +6,29 @@
           <th></th>
           <th scope="col">Product</th>
           <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">SubTotal</th>
         </tr>
       </thead>
       <tbody>
         <% cart_items.each do |cart_item| %>
         <tr>
-          <td> <%= image_tag(cart_item.product.main_image_path, class: 'card-img-top', style: "width: 140px; height: 80px;") %> </td>
-          <th scope="row" class="product-name"><%= cart_item.product.name %></th>
-          <td><%= cart_item.product.price %></td>
+          <td> <%= cart_item.image %> </td>
+          <th scope="row" class="cart_item-name"><%= cart_item.product.name %></th>
+          <td class= "cart_item-price"><%= cart_item.product.price %></td>
+          <td class= "cart_item-quantity"><%= cart_item.quantity %></td>
+          <td class= "cart_item-subtotal"> <%= cart_item.subtotal %> USD </td>
         </tr>
         <% end %>
-
       </tbody>
     </table>
   </div>
    <div class="col-md-3">
      <div>
-     <h3>Total: $<%= cart.total%></h3>
+     <h3>Total: $ <%=cart_items.total %> </h3>
      </div>
      <div>
-       <%= link_to "Empty Cart", cart_path, method: :delete, data: { confirm: "Do you really want to empty the cart?" },
+       <%= link_to "Empty Cart", clear_cart_path, method: :delete, data: { confirm: "Do you really want to empty the cart?" },
                                class: "btn btn-block btn-outline-danger" %>
        <%= link_to "Checkout", orders_path, method: :post, class: "btn btn-block btn btn-outline-dark" %>
      </div>

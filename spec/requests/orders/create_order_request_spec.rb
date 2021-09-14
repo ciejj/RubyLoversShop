@@ -13,7 +13,7 @@ RSpec.describe 'POST /orders', type: :request do
 
     context 'with a product in the cart' do
       before do
-        post '/cart', params: { product_id: product.id }
+        post '/cart_items', params: { product_id: product.id }
       end
 
       it 'creates new Order' do

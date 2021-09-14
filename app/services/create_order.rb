@@ -5,14 +5,14 @@ require 'dry/monads'
 class CreateOrder
   include Dry::Monads[:result, :do]
 
-  def call(cart:, user:)
+  def call(user:)
     Order.transaction do
-      cart = yield validate_cart(cart)
+      cart_items = yield validate_cart(user)
       order = yield create_order(user)
-      yield add_products_to_order(order, cart)
+      yield add_products_to_order(order, cart_items)
       yield link_payment_to_order(order)
       yield link_shipment_to_order(order)
-      yield clear_cart(cart)
+      yield clear_cart(cart_items)
 
       Success("Order has been placed with id: #{order.id}")
     end
@@ -20,11 +20,12 @@ class CreateOrder
 
   private
 
-  def validate_cart(cart)
-    if cart.empty?
+  def validate_cart(user)
+    cart_items = user.cart_items
+    if cart_items.empty?
       Failure('Can\'t place order with an empty cart')
     else
-      Success(cart)
+      Success(cart_items)
     end
   end
 
@@ -38,12 +39,12 @@ class CreateOrder
     end
   end
 
-  def add_products_to_order(order, cart)
-    cart.cart_items.each do |cart_item|
+  def add_products_to_order(order, cart_items)
+    cart_items.each do |cart_item|
       OrderItem.create(product: cart_item.product, order: order)
     end
 
-    if cart.cart_items.count == order.order_items.count
+    if cart_items.count == order.order_items.count
       Success(order)
     else
       Failure('Adding products to order has failed')
@@ -70,11 +71,11 @@ class CreateOrder
     end
   end
 
-  def clear_cart(cart)
-    cart.cart_items.destroy_all
+  def clear_cart(cart_items)
+    cart_items.destroy_all
 
-    if cart.empty?
-      Success(cart)
+    if cart_items.empty?
+      Success(cart_items)
     else
       Failure('Cart could not be emptied')
     end
