@@ -29,7 +29,6 @@ class CartItemsController < ApplicationController
 
   def destroy_all
     CartItem.where(user_id: current_user.id).destroy_all
-    flash[:notice] = 'Cart has been emptied'
-    redirect_to root_path
+    redirect_to root_path, notice: 'Cart has been emptied'
   end
 end
