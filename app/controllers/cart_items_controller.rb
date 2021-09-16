@@ -20,7 +20,7 @@ class CartItemsController < ApplicationController
   end
 
   def update
-    result = CartItems::UpdateQuantity.new.call(params: params)
+    result = CartItems::UpdateQuantity.new.call(id: params[:id], quantity: update_params[:quantity], user: current_user)
 
     flash[:alert] = result.failure unless result.success?
 
@@ -30,5 +30,11 @@ class CartItemsController < ApplicationController
   def destroy_all
     CartItem.where(user_id: current_user.id).destroy_all
     redirect_to root_path, notice: 'Cart has been emptied'
+  end
+
+  private
+
+  def update_params
+    params.require(:cart_item).permit(:quantity)
   end
 end

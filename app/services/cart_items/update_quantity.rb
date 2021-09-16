@@ -6,37 +6,35 @@ module CartItems
   class UpdateQuantity
     include Dry::Monads[:result, :do]
 
-    def call(params:)
-      cart_item = yield get_cart_item(params)
-      quantity = yield get_quantity(params)
+    def call(id:, quantity:, user:)
+      cart_item = yield get_cart_item(id, user)
+      new_quantity = yield validate_quantity(quantity.to_i)
 
-      if quantity.zero?
+      if new_quantity.zero?
         yield destroy(cart_item)
       else
-        yield set_quantity(cart_item, quantity)
+        yield set_quantity(cart_item, new_quantity)
       end
       Success('Quantity update successful')
     end
 
     private
 
-    def get_cart_item(params)
-      cart_item = CartItem.find_by(id: params[:id])
+    def get_cart_item(id, user)
+      cart_item = CartItem.find_by(id: id, user: user)
 
       if cart_item
         Success(cart_item)
       else
-        Failure('Cart Item is missing')
+        Failure('Incorrect Cart Item')
       end
     end
 
-    def get_quantity(params)
-      quantity = params[:cart_item][:quantity]
-
-      if quantity
-        Success(quantity.to_i)
+    def validate_quantity(quantity)
+      if quantity >= 0
+        Success(quantity)
       else
-        Failure('Quantity is required')
+        Failure('Incorrect quantity')
       end
     end
 
