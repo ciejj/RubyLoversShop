@@ -8,13 +8,10 @@ class CartItemsController < ApplicationController
   end
 
   def create
-    result = CartItems::CreateOrIncrement.new.call(params: params, user: current_user)
+    result = CartItems::CreateOrIncrement.new.call(product_id: params[:product_id],
+                                                   quantity: params[:quantity], user: current_user)
 
-    if result.success?
-      flash[:notice] = result.value!
-    else
-      flash[:alert] = result.failure
-    end
+    result.success? ? flash[:notice] = result.value! : flash[:alert] = result.failure
 
     redirect_back(fallback_location: root_path)
   end
