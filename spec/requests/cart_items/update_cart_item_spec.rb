@@ -9,7 +9,6 @@ RSpec.describe '/cart_items', type: :request do
     end
 
     let!(:user1) { create(:user) }
-    let!(:user2) { create(:user) }
     let!(:cart_item) { create(:cart_item, user: user1) }
 
     context 'when cart item belongs to logged in user' do
@@ -49,6 +48,8 @@ RSpec.describe '/cart_items', type: :request do
     end
 
     context 'when cart item does not belong to logged in user' do
+      let!(:user2) { create(:user) }
+
       before do
         login_as(user2, scope: :user)
       end
