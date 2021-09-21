@@ -16,6 +16,12 @@ class CartItemsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def destroy
+
+    CartItem.find_by(user_id: current_user.id, id: params[:id]).destroy
+    redirect_back(fallback_location: root_path)
+  end
+
   def update
     result = CartItems::UpdateQuantity.new.call(id: params[:id], quantity: update_params[:quantity], user: current_user)
 
