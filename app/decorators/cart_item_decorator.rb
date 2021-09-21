@@ -5,7 +5,7 @@ class CartItemDecorator < Draper::Decorator
 
   def destroy_button
     h.link_to 'Remove', h.cart_item_path(id: object.id),
-              method: :delete, class: 'btn btn-outline-danger btn-sm cart_item-remove m-1'
+              method: :delete, class: 'btn btn-outline-danger btn-sm cart_item-remove m-1', id: "remove-#{object.id}"
   end
 
   def image
