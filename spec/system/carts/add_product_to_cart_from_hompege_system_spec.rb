@@ -14,7 +14,6 @@ RSpec.describe 'Clicking \'Add to Cart\' button on the Homepage', type: :system 
     context 'without any copy of a product Product is not in the cart' do
       before do
         visit '/'
-        click_on product.name
         click_button 'Add to Cart'
       end
 
