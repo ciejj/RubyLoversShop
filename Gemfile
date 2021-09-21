@@ -21,6 +21,7 @@ gem 'draper'
 
 group :test do
   gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development, :test do
