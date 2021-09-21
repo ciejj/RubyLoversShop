@@ -12,7 +12,6 @@ class CartItemsController < ApplicationController
                                                    quantity: params[:quantity], user: current_user)
 
     result.success? ? flash[:notice] = result.value! : flash[:alert] = result.failure
-
     redirect_back(fallback_location: root_path)
   end
 
@@ -20,7 +19,7 @@ class CartItemsController < ApplicationController
     result = CartItems::DeleteSingle.new.call(id: params[:id], user: current_user)
 
     flash[:alert] = result.failure unless result.success?
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: cart_path)
   end
 
   def update
@@ -31,8 +30,10 @@ class CartItemsController < ApplicationController
   end
 
   def destroy_all
-    CartItem.where(user_id: current_user.id).destroy_all
-    redirect_to root_path, notice: 'Cart has been emptied'
+    result = CartItems::DeleteAll.new.call(user: current_user)
+    result.success? ? flash[:notice] = result.value! : flash[:alert] = result.failure
+
+    redirect_back(fallback_location: cart_path)
   end
 
   private
