@@ -3,7 +3,7 @@
 require 'dry/monads'
 
 module CartItems
-  class UpdateQuantity
+  class UpdateQuantity < BaseService
     include Dry::Monads[:result, :do]
 
     def call(id:, quantity:, user:)
@@ -20,31 +20,11 @@ module CartItems
 
     private
 
-    def get_cart_item(id, user)
-      cart_item = CartItem.find_by(id: id, user: user)
-
-      if cart_item
-        Success(cart_item)
-      else
-        Failure('Incorrect Cart Item')
-      end
-    end
-
     def validate_quantity(quantity)
       if quantity >= 0
         Success(quantity)
       else
         Failure('Incorrect quantity')
-      end
-    end
-
-    def destroy(cart_item)
-      cart_item.destroy
-
-      if cart_item.destroyed?
-        Success('Cart Item deleted')
-      else
-        Failure('Cart Item could not be deleted')
       end
     end
 

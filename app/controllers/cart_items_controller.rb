@@ -17,8 +17,9 @@ class CartItemsController < ApplicationController
   end
 
   def destroy
+    result = CartItems::DeleteSingle.new.call(id: params[:id], user: current_user)
 
-    CartItem.find_by(user_id: current_user.id, id: params[:id]).destroy
+    flash[:alert] = result.failure unless result.success?
     redirect_back(fallback_location: root_path)
   end
 
@@ -26,7 +27,6 @@ class CartItemsController < ApplicationController
     result = CartItems::UpdateQuantity.new.call(id: params[:id], quantity: update_params[:quantity], user: current_user)
 
     flash[:alert] = result.failure unless result.success?
-
     redirect_back(fallback_location: cart_path)
   end
 
