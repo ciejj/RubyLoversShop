@@ -22,7 +22,7 @@ RSpec.describe 'Changing Order\'s state', type: :system do
       end
     end
 
-    context 'when payments is \'completed\' and shipment is \'shipped\' ' do
+    context 'when payments is \'completed\' and shipment is \'shipped\'' do
       before do
         order.payment.update(state: 'completed')
         order.shipment.update(state: 'shipped')
