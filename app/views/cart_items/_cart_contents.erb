@@ -8,6 +8,7 @@
           <th scope="col">Price</th>
           <th scope="col">Quantity</th>
           <th scope="col">SubTotal</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +19,7 @@
           <td class= "cart_item-price"><%= cart_item.product.price %></td>
           <td class= "cart_item-quantity"><%= cart_item.quantity_form %></td>
           <td class= "cart_item-subtotal"> <%= cart_item.subtotal %> USD </td>
+          <td class= "cart_item-destroy"> <%= cart_item.destroy_button %></td>
         </tr>
         <% end %>
       </tbody>

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.shared_examples 'Order which can\'t be completed', type: :system do |payment_state, shipment_state|
-  context "when payments is '#{payment_state}' and shipment is \'#{shipment_state}\' " do
+  context "when payments is '#{payment_state}' and shipment is \'#{shipment_state}\'" do
     before do
       order.payment.update(state: payment_state)
       order.shipment.update(state: shipment_state)
