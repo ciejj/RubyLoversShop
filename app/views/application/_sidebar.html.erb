@@ -1,13 +1,13 @@
 <h4 class="my-4">Categories</h4>
 <div class="list-group">
   <% Category.all.each do |category|%>
-    <%= link_to category.name, root_path(@active_filters.merge(category: category.id)), class: "list-group-item" %>
+    <%= link_to category.name, request.params.merge(category_id: category.id), class: "list-group-item" %>
   <% end %>
 </div>
 
 <h4 class="my-4">Brands</h4>
 <div class="list-group">
   <% Brand.all.each do |brand|%>
-    <%= link_to brand.name, root_path(@active_filters.merge(brand: brand.id)), class: "list-group-item" %>
+    <%= link_to brand.name, request.params.merge(brand_id: brand.id), class: "list-group-item" %>
   <% end %>
 </div>
