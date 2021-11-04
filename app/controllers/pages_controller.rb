@@ -7,6 +7,6 @@ class PagesController < ApplicationController
   end
 
   def filters_params
-    params.permit(:category, :brand)
+    params.permit(:category_id, :brand_id, price_range_ids: [])
   end
 end
