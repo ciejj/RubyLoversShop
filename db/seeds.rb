@@ -23,6 +23,13 @@ Brand.destroy_all
   )
 end
 
+puts 'generating PriceRanges'
+PriceRange.destroy_all
+PriceRange.create(min: 0, max: 10)
+PriceRange.create(min: 11, max: 20)
+PriceRange.create(min: 51, max: Float::INFINITY)
+PriceRange.create(min: 21, max: 50)
+
 puts 'generating Products'
 Product.destroy_all
 20.times do 
