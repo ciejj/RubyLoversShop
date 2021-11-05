@@ -18,13 +18,13 @@
     <% PriceRange.all.sort_by(&:min).each do |price_range| %>
       <div class="form-check">
         <% checked = params[:price_range_ids]&.include?(price_range.id.to_s) %>
-        <%= check_box_tag("price_range_ids[]", price_range.id, checked, class: "checkbox", id: "price_range_checkbox_#{price_range.id}") %>
-        <%= price_range.name %>
+        <%= check_box_tag("price_range_ids[]", price_range.id, checked, class: "checkbox", id: "price-range-checkbox-#{price_range.id}") %>
+        <%= label_tag(price_range.name, nil,  class: "form-check-label", for: "price-range-checkbox-#{price_range.id}") %>
       </div>
     <% end %>
     
     <%= hidden_field_tag :category_id, params[:category_id] if params[:category_id] %>
     <%= hidden_field_tag :brand_id, params[:brand_id] if params[:brand_id] %>
-    <%= submit_tag('Filter', name: nil, class: "btn btn-block btn-outline-primary", id: "filter_button" ) %>
+    <%= submit_tag('Filter', name: nil, class: "btn btn-block btn-outline-primary", id: "filter-button" ) %>
   <% end %>
 <% end %>

@@ -3,7 +3,7 @@
 class PriceRange < ApplicationRecord
   def name
     if min.zero?
-      "under $#{max}"
+      "Under $#{max}"
     elsif max == Float::INFINITY
       "$#{min} & Above"
     else
