@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   resources :orders, only: %i[create]
   resources :cart_items, only: %i[create destroy update]
 
+  namespace :orders do
+    resource :billing_address, only: %i[new create]
+  end
+
   get 'cart', to: 'cart_items#index'
   delete 'cart_items', to: 'cart_items#destroy_all', as: :clear_cart
 end
