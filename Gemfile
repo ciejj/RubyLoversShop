@@ -15,6 +15,7 @@ gem 'devise'
 gem 'faker'
 gem 'aws-sdk-s3', require: false
 gem 'dry-monads'
+gem 'dry-validation'
 gem 'pagy'
 gem 'aasm', '~> 5.2'
 gem 'draper'
