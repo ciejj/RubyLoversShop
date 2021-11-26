@@ -30,4 +30,6 @@ Style/GuardClause:
   Enabled: false
 RSpec/NestedGroups:
   Max: 4
+  Exclude:
+    - spec/system/carts/cart_checkout_system_spec.rb
   
