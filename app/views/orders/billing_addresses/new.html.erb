@@ -1,6 +1,4 @@
-
-
-  <%= form_with model: [:ordrers, @address], url: orders_billing_address_path,  local: true do |f| %>
+<%= form_with model: [:ordrers, @address], url: orders_billing_address_path,  local: true do |f| %>
 
     <%= render "shared/error_messages", errors: @errors %>
     <div class="form-group row">

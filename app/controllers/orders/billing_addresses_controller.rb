@@ -17,7 +17,6 @@ module Orders
         flash[:notice] = result.value!
         redirect_to root_path
       else
-        flash[:alert] = 'Billing Address could not be created'
         @errors = result.failure
         @address = Address.new(address_params)
         render :new
