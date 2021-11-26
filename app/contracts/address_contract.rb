@@ -2,8 +2,7 @@
 
 class AddressContract < Dry::Validation::Contract
   params do
-    required(:street_name_1).filled(:string)
-    optional(:street_name_1).filled(:string)
+    required(:street_name1).filled(:string)
     required(:city).filled(:string)
     required(:city).filled(:string)
     required(:country).filled(:string)

@@ -2,14 +2,15 @@
 
   <%= form_with model: [:ordrers, @address], url: orders_billing_address_path,  local: true do |f| %>
 
+    <%= render "shared/error_messages", errors: @errors %>
     <div class="form-group row">
-      <label for="address_street_name_1" class="col-3 col-form-label">Street Name 1</label>
-      <%= f.text_field :street_name_1, class: "form-control col-9" %>
+      <label for="address_street_name1" class="col-3 col-form-label">Street Name 1</label>
+      <%= f.text_field :street_name1, class: "form-control col-9" %>
     </div>
 
     <div class="form-group row">
-      <label for="address_street_name_2" class="col-3 col-form-label">Street Name 2</label>
-      <%= f.text_field :street_name_2, class: "form-control col-9" %>
+      <label for="address_street_name2" class="col-3 col-form-label">Street Name 2</label>
+      <%= f.text_field :street_name2, class: "form-control col-9" %>
     </div>
   
     <div class="form-group row">

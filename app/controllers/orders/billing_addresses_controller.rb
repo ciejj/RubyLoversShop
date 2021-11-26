@@ -25,7 +25,7 @@ module Orders
     end
 
     def address_params
-      params.require(:address).permit(:street_name_1, :street_name_2,
+      params.require(:address).permit(:street_name1, :street_name2,
                                       :city, :country, :state, :zip, :phone)
     end
   end
