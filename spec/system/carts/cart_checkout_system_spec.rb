@@ -22,8 +22,8 @@ RSpec.describe 'Cart - Checkout', type: :system do
         expect(page).to have_content('Order has been placed')
       end
 
-      it 'redirects to root path' do
-        expect(page).to have_current_path(root_path)
+      it 'redirects to billing address form' do
+        expect(page).to have_current_path(new_orders_billing_address_path)
       end
     end
   end
